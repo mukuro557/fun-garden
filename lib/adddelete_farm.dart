@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fungarden/auction.dart';
 
-class Add_delete extends StatefulWidget {
+class Adddelete extends StatefulWidget {
   @override
-  _Add_deleteState createState() => _Add_deleteState();
+  _AdddeleteState createState() => _AdddeleteState();
 }
 
-class _Add_deleteState extends State<Add_delete> {
+class _AdddeleteState extends State<Adddelete> {
   var farmnum = [
     {
       'img':
