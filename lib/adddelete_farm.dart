@@ -32,7 +32,20 @@ class _AdddeleteState extends State<Adddelete> {
       ),
       body: Column(
         children: [
-          Text('เพิ่มหรือลบสินค้า'),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'เพิ่มหรือลบสินค้า',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
             child: Row(
