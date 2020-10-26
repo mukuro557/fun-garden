@@ -26,7 +26,8 @@ class _AuctionState extends State<Auction> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Title'),
+        backgroundColor: Color.fromARGB(255, 87, 204, 153),
+        title: Text('Fun garden'),
       ),
       body: Column(
         children: [
@@ -143,6 +144,7 @@ class _AuctionState extends State<Auction> {
             child: ButtonTheme(
               minWidth: MediaQuery.of(context).size.width,
               child: RaisedButton(
+                color: Color.fromARGB(255, 87, 204, 153),
                 onPressed: () {},
                 child: Text(
                   'ประมูล',
