@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fungarden/auction.dart';
 
-class Adddelete extends StatefulWidget {
+class Sellhistory extends StatefulWidget {
   @override
-  _AdddeleteState createState() => _AdddeleteState();
+  _SellhistoryState createState() => _SellhistoryState();
 }
 
-class _AdddeleteState extends State<Adddelete> {
+class _SellhistoryState extends State<Sellhistory> {
   var farmnum = [
     {
       'img':
@@ -37,7 +37,7 @@ class _AdddeleteState extends State<Adddelete> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  'เพิ่มหรือลบสินค้า',
+                  'ประวัติการขาย',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -49,18 +49,20 @@ class _AdddeleteState extends State<Adddelete> {
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Auction()),
-                    );
-                  },
-                  child: Text('ทั้งหมด'),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Auction()),
+                      );
+                    },
+                    child: Text('ทั้งหมด'),
+                  ),
                 ),
                 RaisedButton(
                   shape: RoundedRectangleBorder(
@@ -89,47 +91,7 @@ class _AdddeleteState extends State<Adddelete> {
                     //   MaterialPageRoute(builder: (context) => Auction()),
                     // );
                   },
-                  child: Text('กำลังประมูล'),
-                ),
-                RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
-                  onPressed: () {
-                    farmnum = [
-                      {
-                        'img':
-                            'https://lh3.googleusercontent.com/CyEh4E_n3bjSUD0GwiSgGkyk_8keXD1h9BHApMsDtvN7lb-az3RvfzVG-jSMyerVVt2SkM1K_0xQdcDLbQ=w1080-h608-p-no-v0',
-                        'farmname': 'สวนยายดา',
-                        'address':
-                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
-                        'price': '40000'
-                      },
-                      {
-                        'img':
-                            'https://www.technologychaoban.com/wp-content/uploads/2018/12/zx001.jpg',
-                        'farmname': 'สวนยายดา-เจ๊บุญชื่น',
-                        'address':
-                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
-                        'price': '35000'
-                      }
-                    ];
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => Auction()),
-                    // );
-                  },
-                  child: Text('รอชำระ'),
-                ),
-                RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Auction()),
-                    );
-                  },
-                  child: Text('ชำระแล้ว'),
+                  child: Text('ขายแล้ว'),
                 ),
               ],
             ),
@@ -149,9 +111,22 @@ class _AdddeleteState extends State<Adddelete> {
                         child: Container(
                             child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            farmnum[index]['img'],
-                            width: 100,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.check),
+                                    Text('การขายสำเร็จ'),
+                                  ],
+                                ),
+                              ),
+                              Image.network(
+                                farmnum[index]['img'],
+                                width: 90,
+                              ),
+                            ],
                           ),
                         )),
                       ),
