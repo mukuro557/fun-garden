@@ -66,10 +66,28 @@ class _AdddeleteState extends State<Adddelete> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Auction()),
-                    );
+                    farmnum = [
+                      {
+                        'img':
+                            'https://f.ptcdn.info/707/006/000/1372475416-DSC2429res-o.jpg',
+                        'farmname': 'สวนยายดา-เจ๊บุญชื่น',
+                        'address':
+                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+                        'price': '30000'
+                      },
+                      {
+                        'img':
+                            'https://www.technologychaoban.com/wp-content/uploads/2018/12/zx001.jpg',
+                        'farmname': 'สวนยายดา-เจ๊บุญชื่น',
+                        'address':
+                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+                        'price': '30000'
+                      }
+                    ];
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => Auction()),
+                    // );
                   },
                   child: Text('กำลังประมูล'),
                 ),
@@ -77,10 +95,28 @@ class _AdddeleteState extends State<Adddelete> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Auction()),
-                    );
+                    farmnum = [
+                      {
+                        'img':
+                            'https://lh3.googleusercontent.com/CyEh4E_n3bjSUD0GwiSgGkyk_8keXD1h9BHApMsDtvN7lb-az3RvfzVG-jSMyerVVt2SkM1K_0xQdcDLbQ=w1080-h608-p-no-v0',
+                        'farmname': 'สวนยายดา',
+                        'address':
+                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+                        'price': '40000'
+                      },
+                      {
+                        'img':
+                            'https://www.technologychaoban.com/wp-content/uploads/2018/12/zx001.jpg',
+                        'farmname': 'สวนยายดา-เจ๊บุญชื่น',
+                        'address':
+                            'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+                        'price': '35000'
+                      }
+                    ];
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => Auction()),
+                    // );
                   },
                   child: Text('รอชำระ'),
                 ),
