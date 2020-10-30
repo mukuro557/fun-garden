@@ -13,7 +13,7 @@ class Login extends StatelessWidget {
                 child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 30, 0, 5),
               child: Text(
-                'Log in',
+                'ลงชื่อเข้าใช้',
                 style: TextStyle(
                     color: Color.fromRGBO(34, 87, 122, 10),
                     fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class Login extends StatelessWidget {
                                   flex: 9,
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      hintText: 'Username',
+                                      hintText: 'ชื่อผู้ใช้',
                                       hintStyle: TextStyle(color: Colors.black),
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
@@ -71,7 +71,7 @@ class Login extends StatelessWidget {
                                   flex: 9,
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      hintText: 'password',
+                                      hintText: 'รหัสผ่าน',
                                       hintStyle: TextStyle(color: Colors.black),
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
@@ -87,7 +87,7 @@ class Login extends StatelessWidget {
                             children: [
                               Spacer(),
                               Text(
-                                'forget password?',
+                                ' ลืมรหัสผ่าน?',
                                 style: TextStyle(
                                   color: Color.fromRGBO(34, 87, 122, 10),
                                 ),
@@ -108,7 +108,7 @@ class Login extends StatelessWidget {
                               hoverColor: Colors.green,
                               color: Color.fromRGBO(56, 163, 165, 10),
                               child: Text(
-                                "Log in",
+                                "ลงชื่อเข้าใช้",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
