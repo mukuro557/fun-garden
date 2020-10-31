@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:fungarden/auction.dart';
+import 'package:fungarden/auction1.dart';
 
-class History extends StatefulWidget {
+class AddP extends StatefulWidget {
   @override
-  _HistoryState createState() => _HistoryState();
+  _AddPState createState() => _AddPState();
 }
 
-class _HistoryState extends State<History> {
+class _AddPState extends State<AddP> {
+  var farmnum = [
+    {
+      'img': 'https://mpics.mgronline.com/pics/Images/561000005187502.JPEG',
+      'farmname': 'สวนยายดา-เจ๊บุญชื่น',
+      'address': 'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+      'price': '30000'
+    },
+    {
+      'img': 'https://mpics.mgronline.com/pics/Images/561000005187502.JPEG',
+      'farmname': 'สวนยายดา-เจ๊บุญชื่น',
+      'address': 'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
+      'price': '30000'
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 4,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('ประวัติการซื้อขาย'),
+              title: Text('ประมูลสินค้า'),
               centerTitle: true,
               backgroundColor: Color.fromRGBO(56, 163, 165, 10),
               bottom: TabBar(tabs: [
                 Tab(
                   text: 'ทั้งหมด',
                 ),
-                Tab(text: 'ขายแล้ว'),
+                Tab(text: 'กำลังประมูล'),
+                Tab(text: 'รอชำระ'),
+                Tab(text: 'ชำระแล้ว'),
               ]),
             ),
             body: Column(
@@ -37,7 +55,7 @@ class _HistoryState extends State<History> {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 250,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -49,27 +67,6 @@ class _HistoryState extends State<History> {
                         ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
-                              child: Row(
-                                children: [
-                                  Ink(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(Icons.android),
-                                      color: Colors.white,
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Text('การซื้อสำเร็จ')
-                                ],
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
@@ -118,23 +115,11 @@ class _HistoryState extends State<History> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(bottom: 20, left: 230),
-                              child: Column(
-                                children: [
-                                  Text('ราคา 4,500 บาท',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                                  const EdgeInsets.only(left: 190, top: 20),
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(),
                                     child: ButtonTheme(
                                       minWidth: 150.0,
                                       height: 50,
@@ -147,32 +132,20 @@ class _HistoryState extends State<History> {
                                         hoverColor: Colors.green,
                                         color: Color.fromRGBO(56, 163, 165, 10),
                                         child: Text(
-                                          "ชำระเงินแล้ว",
+                                          "ข้อมูล",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Auction()),
+                                          );
+                                        },
                                       ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
                                     ),
                                   ),
                                 ],
@@ -189,7 +162,7 @@ class _HistoryState extends State<History> {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 250,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -201,27 +174,6 @@ class _HistoryState extends State<History> {
                         ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
-                              child: Row(
-                                children: [
-                                  Ink(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(Icons.android),
-                                      color: Colors.white,
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Text('การซื้อสำเร็จ')
-                                ],
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
@@ -269,20 +221,7 @@ class _HistoryState extends State<History> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 20, left: 230),
-                              child: Column(
-                                children: [
-                                  Text('ราคา 5,500 บาท',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 180, top: 20),
                               child: Row(
                                 children: [
                                   Padding(
@@ -296,35 +235,23 @@ class _HistoryState extends State<History> {
                                       ),
                                       child: RaisedButton(
                                         elevation: 2.0,
-                                        hoverColor: Colors.green,
+                                        hoverColor: Colors.red,
                                         color: Color.fromRGBO(56, 163, 165, 10),
                                         child: Text(
-                                          "ชำระเงินแล้ว",
+                                          "ข้อมูล",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        onPressed: () {},
+                                         onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Auction1()),
+                                          );
+                                        },
                                       ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
                                     ),
                                   ),
                                 ],

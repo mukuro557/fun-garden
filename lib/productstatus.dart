@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 
-class History extends StatefulWidget {
+class ProductSta extends StatefulWidget {
   @override
-  _HistoryState createState() => _HistoryState();
+  _ProductStaState createState() => _ProductStaState();
 }
 
-class _HistoryState extends State<History> {
+class _ProductStaState extends State<ProductSta> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('ประวัติการซื้อขาย'),
+              title: Text('สถานะสินค้า'),
               centerTitle: true,
               backgroundColor: Color.fromRGBO(56, 163, 165, 10),
               bottom: TabBar(tabs: [
                 Tab(
                   text: 'ทั้งหมด',
                 ),
-                Tab(text: 'ขายแล้ว'),
+                Tab(text: 'กำลังจัดส่ง'),
+                Tab(text: 'ได้รับสินค้าแล้ว'),
               ]),
             ),
             body: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
+                  padding: const EdgeInsets.only(top: 50, left: 50, right: 50),
                   child: Row(
                     children: [],
                   ),
@@ -37,7 +38,7 @@ class _HistoryState extends State<History> {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 300,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -51,22 +52,22 @@ class _HistoryState extends State<History> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
+                                  left: 15, top: 20, right: 320),
                               child: Row(
                                 children: [
                                   Ink(
                                     decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
+                                      color: Color.fromRGBO(56, 163, 165, 10),
                                       shape: CircleBorder(),
                                     ),
                                     child: IconButton(
-                                      icon: Icon(Icons.android),
+                                      icon: Icon(Icons.check),
                                       color: Colors.white,
                                       onPressed: () {},
                                     ),
                                   ),
                                   Spacer(),
-                                  Text('การซื้อสำเร็จ')
+                                  Text('สวนลิ้นจี่คุณจ่า',style: TextStyle(fontWeight: FontWeight.bold))
                                 ],
                               ),
                             ),
@@ -88,11 +89,10 @@ class _HistoryState extends State<History> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 65),
+                                        padding: const EdgeInsets.only(),
                                         child: Column(
                                           children: [
-                                            Text('สวนลิ้นจี่คุณจ่า',
+                                            Text('ลิ้นจี่เกรด A',
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
@@ -103,11 +103,11 @@ class _HistoryState extends State<History> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 35),
+                                            const EdgeInsets.only(left: 20),
                                         child: Column(
                                           children: [
                                             Text(
-                                                '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย')
+                                                'สถานะ: กำลังจัดส่ง', style: TextStyle(color: Colors.grey))
                                           ],
                                         ),
                                       )
@@ -117,64 +117,10 @@ class _HistoryState extends State<History> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 20, left: 230),
-                              child: Column(
-                                children: [
-                                  Text('ราคา 4,500 บาท',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 300),
                               child: Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 50,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: RaisedButton(
-                                        elevation: 2.0,
-                                        hoverColor: Colors.green,
-                                        color: Color.fromRGBO(56, 163, 165, 10),
-                                        child: Text(
-                                          "ชำระเงินแล้ว",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
+                                  Text('เลขพัสดุ: 1212312121', style: TextStyle(fontWeight: FontWeight.bold),),
                                 ],
                               ),
                             )
@@ -183,13 +129,13 @@ class _HistoryState extends State<History> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: GestureDetector(
                     onTap: () {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 300,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -203,27 +149,28 @@ class _HistoryState extends State<History> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
+                                  left: 15, top: 20, right: 320),
                               child: Row(
                                 children: [
                                   Ink(
                                     decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
+                                      color: Color.fromRGBO(56, 163, 165, 10),
                                       shape: CircleBorder(),
                                     ),
                                     child: IconButton(
-                                      icon: Icon(Icons.android),
+                                      icon: Icon(Icons.check),
                                       color: Colors.white,
                                       onPressed: () {},
                                     ),
                                   ),
                                   Spacer(),
-                                  Text('การซื้อสำเร็จ')
+                                  Text('สวนเงาะคุณผึ้ง',style: TextStyle(fontWeight: FontWeight.bold))
                                 ],
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, bottom: 10),
                               child: Row(
                                 children: [
                                   GestureDetector(
@@ -240,11 +187,10 @@ class _HistoryState extends State<History> {
                                   Column(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 65),
+                                        padding: const EdgeInsets.only(),
                                         child: Column(
                                           children: [
-                                            Text('สวนเงาะคุณผึ้ง',
+                                            Text('เงาะเกรด A',
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
@@ -255,11 +201,11 @@ class _HistoryState extends State<History> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 35),
+                                            const EdgeInsets.only(left: 20),
                                         child: Column(
                                           children: [
                                             Text(
-                                                '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย')
+                                                'สถานะ: กำลังจัดส่ง', style: TextStyle(color: Colors.grey),)
                                           ],
                                         ),
                                       )
@@ -269,67 +215,13 @@ class _HistoryState extends State<History> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 20, left: 230),
-                              child: Column(
+                              padding: const EdgeInsets.only(left: 300),
+                              child: Row(
                                 children: [
-                                  Text('ราคา 5,500 บาท',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
+                                  Text('เลขพัสดุ1313213312',style: TextStyle(fontWeight: FontWeight.bold),)
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 150),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 50,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: RaisedButton(
-                                        elevation: 2.0,
-                                        hoverColor: Colors.green,
-                                        color: Color.fromRGBO(56, 163, 165, 10),
-                                        child: Text(
-                                          "ชำระเงินแล้ว",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         )),
                   ),

@@ -8,77 +8,39 @@ class Money extends StatefulWidget {
 class _MoneyState extends State<Money> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text('ยอดเงินที่ได้รับ'),
+              centerTitle: true,
+              backgroundColor: Color.fromRGBO(56, 163, 165, 10),
+              
+            ),
         body: Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
           child: Row(
             children: [
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Colors.lightBlue,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  color: Colors.white,
-                  onPressed: () {},
-                ),
-              ),
-              Spacer(),
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Colors.lightBlue,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.android),
-                  color: Colors.white,
-                  onPressed: () {},
-                ),
-              ),
+              
             ],
           ),
         ),
         Padding(
           padding:
-              const EdgeInsets.only(left: 48, bottom: 30, top: 50, right: 50),
+              const EdgeInsets.only(left: 48, bottom: 30, top: 10, right: 50),
           child: Row(
             children: [
-              Text(
-                'ยอดเงินที่ได้รับ',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              Spacer(),
               Text(
                 'รวม 10,000 บาท',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
+              
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 50, right: 50, bottom: 30),
-          child: Row(
-            children: [
-              Container(
-                child: Text('ทั้งหมด',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 300),
-                child: Container(
-                  child: Text('ขายแล้ว'),
-                ),
-              ),
-            ],
-          ),
-        ),
+        
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: GestureDetector(
@@ -91,7 +53,7 @@ class _MoneyState extends State<Money> {
                 decoration: BoxDecoration(
                   // color: Colors.yellow[600],
                   border: Border.all(
-                    color: Colors.red[300],
+                    color: Colors.grey[500],
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(20),
@@ -131,7 +93,7 @@ class _MoneyState extends State<Money> {
                               height: 150,
                               width: 140,
                               child: Image.network(
-                                  'https://lh3.googleusercontent.com/proxy/0E4OCgy7trxh-nD3Hdh_U82ozw8E1xW-uC6YSHkIBL9gfcX-H9MFezKE3CiMnx5wXsc-P8wjxPqHMamh6Rp9rXMxhBV7nbJzMV95FMxELYg'),
+                                  'https://obs.line-scdn.net/0hgyYWTptTOFZkLhSPeVJHAV54OzlXQitVABhpVThAZmIZTSsAWUskOEcnNW9JSX8ICkB3MUAvI2dPSS8CXkgk/w644'),
                             ),
                           ),
                           Column(
@@ -162,7 +124,7 @@ class _MoneyState extends State<Money> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 40, left: 290),
+                      padding: const EdgeInsets.only(bottom: 20, left: 230),
                       child: Column(
                         children: [
                           Text('ราคา 4,500 บาท',
@@ -189,7 +151,7 @@ class _MoneyState extends State<Money> {
                 decoration: BoxDecoration(
                   // color: Colors.yellow[600],
                   border: Border.all(
-                    color: Colors.red[300],
+                    color: Colors.grey[500],
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(20),
@@ -229,7 +191,7 @@ class _MoneyState extends State<Money> {
                               height: 150,
                               width: 140,
                               child: Image.network(
-                                  'https://www.prachachat.net/wp-content/uploads/2019/07/DSC_0471-1.jpg'),
+                                  'https://mpics.mgronline.com/pics/Images/561000005187502.JPEG'),
                             ),
                           ),
                           Column(
@@ -260,7 +222,7 @@ class _MoneyState extends State<Money> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 40, left: 290),
+                      padding: const EdgeInsets.only(bottom: 20, left: 230),
                       child: Column(
                         children: [
                           Text('ราคา 5,500 บาท',
@@ -276,6 +238,6 @@ class _MoneyState extends State<Money> {
           ),
         ),
       ],
-    ));
+    )));
   }
 }

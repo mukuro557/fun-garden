@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
-class History extends StatefulWidget {
+class AuctionProduct extends StatefulWidget {
   @override
-  _HistoryState createState() => _HistoryState();
+  _AuctionProductState createState() => _AuctionProductState();
 }
 
-class _HistoryState extends State<History> {
+class _AuctionProductState extends State<AuctionProduct> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 4,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('ประวัติการซื้อขาย'),
+              title: Text('สินค้าประมูลของคุณ'),
               centerTitle: true,
               backgroundColor: Color.fromRGBO(56, 163, 165, 10),
               bottom: TabBar(tabs: [
                 Tab(
                   text: 'ทั้งหมด',
                 ),
-                Tab(text: 'ขายแล้ว'),
+                Tab(text: 'ประมูลแล้ว'),
+                Tab(text: 'กำลังประมูล'),
+                Tab(text: 'ยังไม่ประมูล'),
               ]),
             ),
             body: Column(
@@ -66,7 +68,7 @@ class _HistoryState extends State<History> {
                                     ),
                                   ),
                                   Spacer(),
-                                  Text('การซื้อสำเร็จ')
+                                  Text('ประมูลสำเร็จ')
                                 ],
                               ),
                             ),
@@ -82,7 +84,7 @@ class _HistoryState extends State<History> {
                                       height: 150,
                                       width: 140,
                                       child: Image.network(
-                                          'https://obs.line-scdn.net/0hgyYWTptTOFZkLhSPeVJHAV54OzlXQitVABhpVThAZmIZTSsAWUskOEcnNW9JSX8ICkB3MUAvI2dPSS8CXkgk/w644'),
+                                          'https://obs.line-scdn.net/0hgyYWTptTOFZkLhSPeVJHAV54OzlXQitVABhpVThAZmIZTSsAWUskOEcnNW9JSX8ICkB3MUAvI2dPSS8CXkgk/w644'), 
                                     ),
                                   ),
                                   Column(
@@ -130,32 +132,9 @@ class _HistoryState extends State<History> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 300),
                               child: Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 50,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: RaisedButton(
-                                        elevation: 2.0,
-                                        hoverColor: Colors.green,
-                                        color: Color.fromRGBO(56, 163, 165, 10),
-                                        child: Text(
-                                          "ชำระเงินแล้ว",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
                                   ButtonTheme(
                                     minWidth: 150.0,
                                     height: 50,
@@ -167,7 +146,7 @@ class _HistoryState extends State<History> {
                                       hoverColor: Colors.green,
                                       color: Color.fromRGBO(56, 163, 165, 10),
                                       child: Text(
-                                        "จัดส่งแล้ว",
+                                        "ชำระเงินแล้ว",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -189,7 +168,7 @@ class _HistoryState extends State<History> {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 360,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -218,7 +197,7 @@ class _HistoryState extends State<History> {
                                     ),
                                   ),
                                   Spacer(),
-                                  Text('การซื้อสำเร็จ')
+                                  Text('ประมูลสำเร็จ')
                                 ],
                               ),
                             ),
@@ -234,7 +213,7 @@ class _HistoryState extends State<History> {
                                       height: 150,
                                       width: 140,
                                       child: Image.network(
-                                          'https://mpics.mgronline.com/pics/Images/561000005187502.JPEG'),
+                                          'https://mpics.mgronline.com/pics/Images/561000005187502.JPEG'), 
                                     ),
                                   ),
                                   Column(
@@ -282,32 +261,9 @@ class _HistoryState extends State<History> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 300),
                               child: Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 50,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: RaisedButton(
-                                        elevation: 2.0,
-                                        hoverColor: Colors.green,
-                                        color: Color.fromRGBO(56, 163, 165, 10),
-                                        child: Text(
-                                          "ชำระเงินแล้ว",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ),
                                   ButtonTheme(
                                     minWidth: 150.0,
                                     height: 50,
@@ -319,7 +275,7 @@ class _HistoryState extends State<History> {
                                       hoverColor: Colors.green,
                                       color: Color.fromRGBO(56, 163, 165, 10),
                                       child: Text(
-                                        "จัดส่งแล้ว",
+                                        "ชำระเงิน",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),

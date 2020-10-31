@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
-class History extends StatefulWidget {
+class NewmainPage extends StatefulWidget {
   @override
-  _HistoryState createState() => _HistoryState();
+  _NewmainPageState createState() => _NewmainPageState();
 }
 
-class _HistoryState extends State<History> {
+class _NewmainPageState extends State<NewmainPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 4,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('ประวัติการซื้อขาย'),
+              title: Text('รายชื่อสวน'),
               centerTitle: true,
               backgroundColor: Color.fromRGBO(56, 163, 165, 10),
               bottom: TabBar(tabs: [
                 Tab(
-                  text: 'ทั้งหมด',
+                  text: 'ล่าสุด',
                 ),
-                Tab(text: 'ขายแล้ว'),
+                Tab(text: 'ใกล้สุด'),
+                Tab(text: 'ราคาดี'),
+                Tab(text: 'แพง'),
               ]),
             ),
             body: Column(
@@ -37,7 +39,7 @@ class _HistoryState extends State<History> {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 300,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -49,27 +51,7 @@ class _HistoryState extends State<History> {
                         ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
-                              child: Row(
-                                children: [
-                                  Ink(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(Icons.android),
-                                      color: Colors.white,
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Text('การซื้อสำเร็จ')
-                                ],
-                              ),
-                            ),
+                            
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
@@ -89,10 +71,27 @@ class _HistoryState extends State<History> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 65),
-                                        child: Column(
+                                            const EdgeInsets.only(),
+                                        child: Row(
                                           children: [
-                                            Text('สวนลิ้นจี่คุณจ่า',
+                                            Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Container(
+                                            width: 60,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(9),
+                                              child: Text('1,000'),
+                                            ),
+                                          ),
+                                        ),
+
+                                            Text('เริ่มต้นที่',
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
@@ -103,11 +102,11 @@ class _HistoryState extends State<History> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 35),
+                                            const EdgeInsets.only(),
                                         child: Column(
                                           children: [
                                             Text(
-                                                '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย')
+                                                'เหลือเวลา 48:00:00',style: TextStyle(color: Colors.grey))
                                           ],
                                         ),
                                       )
@@ -121,16 +120,18 @@ class _HistoryState extends State<History> {
                                   const EdgeInsets.only(bottom: 20, left: 230),
                               child: Column(
                                 children: [
-                                  Text('ราคา 4,500 บาท',
+                                  Text('สวนลิ้นจี่คุณจ่า',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
+                                  Text('54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
+                                      style: TextStyle(color: Colors.black))
                                 ],
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 290),
                               child: Row(
                                 children: [
                                   Padding(
@@ -147,32 +148,13 @@ class _HistoryState extends State<History> {
                                         hoverColor: Colors.green,
                                         color: Color.fromRGBO(56, 163, 165, 10),
                                         child: Text(
-                                          "ชำระเงินแล้ว",
+                                          "ประมูล",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         onPressed: () {},
                                       ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
                                     ),
                                   ),
                                 ],
@@ -182,14 +164,20 @@ class _HistoryState extends State<History> {
                         )),
                   ),
                 ),
+               Padding(
+                  padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
+                  child: Row(
+                    children: [],
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: GestureDetector(
                     onTap: () {
                       print("Tapped a Container");
                     },
                     child: Container(
-                        height: 350,
+                        height: 300,
                         width: 500,
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
@@ -201,27 +189,7 @@ class _HistoryState extends State<History> {
                         ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
-                              child: Row(
-                                children: [
-                                  Ink(
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(Icons.android),
-                                      color: Colors.white,
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Text('การซื้อสำเร็จ')
-                                ],
-                              ),
-                            ),
+                            
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
@@ -241,10 +209,26 @@ class _HistoryState extends State<History> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 65),
-                                        child: Column(
+                                            const EdgeInsets.only(),
+                                        child: Row(
                                           children: [
-                                            Text('สวนเงาะคุณผึ้ง',
+                                            Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Container(
+                                            width: 60,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(9),
+                                              child: Text('1,000'),
+                                            ),
+                                          ),
+                                        ),
+                                            Text('เริ่มต้นที่',
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
@@ -255,11 +239,11 @@ class _HistoryState extends State<History> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 35),
+                                            const EdgeInsets.only(),
                                         child: Column(
                                           children: [
                                             Text(
-                                                '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย')
+                                                'เหลือเวลา 48:00:00',style: TextStyle(color: Colors.grey))
                                           ],
                                         ),
                                       )
@@ -273,16 +257,18 @@ class _HistoryState extends State<History> {
                                   const EdgeInsets.only(bottom: 20, left: 230),
                               child: Column(
                                 children: [
-                                  Text('ราคา 5,500 บาท',
+                                  Text('สวนเงาะคุณผึ้ง',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
+                                  Text('54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
+                                      style: TextStyle(color: Colors.black))
                                 ],
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 150),
+                              padding: const EdgeInsets.only(left: 290),
                               child: Row(
                                 children: [
                                   Padding(
@@ -299,32 +285,13 @@ class _HistoryState extends State<History> {
                                         hoverColor: Colors.green,
                                         color: Color.fromRGBO(56, 163, 165, 10),
                                         child: Text(
-                                          "ชำระเงินแล้ว",
+                                          "ประมูล",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         onPressed: () {},
                                       ),
-                                    ),
-                                  ),
-                                  ButtonTheme(
-                                    minWidth: 150.0,
-                                    height: 50,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    child: RaisedButton(
-                                      elevation: 2.0,
-                                      hoverColor: Colors.green,
-                                      color: Color.fromRGBO(56, 163, 165, 10),
-                                      child: Text(
-                                        "จัดส่งแล้ว",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () {},
                                     ),
                                   ),
                                 ],
