@@ -43,7 +43,7 @@ class _ProductStaState extends State<ProductSta> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -140,7 +140,7 @@ class _ProductStaState extends State<ProductSta> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),

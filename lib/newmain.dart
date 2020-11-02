@@ -44,7 +44,7 @@ class _NewmainPageState extends State<NewmainPage> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -81,7 +81,7 @@ class _NewmainPageState extends State<NewmainPage> {
                                             height: 35,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: Colors.blue),
+                                                    color: Color.fromRGBO(56, 163, 165, 10)),
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Padding(
@@ -182,7 +182,7 @@ class _NewmainPageState extends State<NewmainPage> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -219,7 +219,7 @@ class _NewmainPageState extends State<NewmainPage> {
                                             height: 35,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: Colors.blue),
+                                                    color: Color.fromRGBO(56, 163, 165, 10),),
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Padding(

@@ -42,7 +42,7 @@ class _HistoryState extends State<History> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -56,11 +56,11 @@ class _HistoryState extends State<History> {
                                 children: [
                                   Ink(
                                     decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
+                                      color: Color.fromRGBO(56, 163, 165, 10),
                                       shape: CircleBorder(),
                                     ),
                                     child: IconButton(
-                                      icon: Icon(Icons.android),
+                                      icon: Icon(Icons.check),
                                       color: Colors.white,
                                       onPressed: () {},
                                     ),
@@ -194,7 +194,7 @@ class _HistoryState extends State<History> {
                         decoration: BoxDecoration(
                           // color: Colors.yellow[600],
                           border: Border.all(
-                            color: Colors.grey[500],
+                            color: Color.fromRGBO(56, 163, 165, 10),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -208,11 +208,11 @@ class _HistoryState extends State<History> {
                                 children: [
                                   Ink(
                                     decoration: const ShapeDecoration(
-                                      color: Colors.lightBlue,
+                                      color: Color.fromRGBO(56, 163, 165, 10),
                                       shape: CircleBorder(),
                                     ),
                                     child: IconButton(
-                                      icon: Icon(Icons.android),
+                                      icon: Icon(Icons.check),
                                       color: Colors.white,
                                       onPressed: () {},
                                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 final List<String> imgList = [
   'http://img.painaidii.com/images/20170425_8176_1493102751_242437.jpg',
@@ -31,23 +31,23 @@ class _Auction1State extends State<Auction1> {
       ),
       body: Column(
         children: [
-          // CarouselSlider(
-          //   autoPlay: true,
-          //   autoPlayAnimationDuration: Duration(milliseconds: 500),
-          //   autoPlayCurve: Curves.fastOutSlowIn,
-          //   height: MediaQuery.of(context).size.height / 2.5,
-          //   items: imgList.map((card) {
-          //     return Builder(builder: (BuildContext context) {
-          //       return Container(
-          //         height: MediaQuery.of(context).size.height / 2.5,
-          //         width: MediaQuery.of(context).size.width,
-          //         child: Card(
-          //           child: Image.network(card, fit: BoxFit.cover),
-          //         ),
-          //       );
-          //     });
-          //   }).toList(),
-          // ),
+          CarouselSlider(
+            autoPlay: true,
+            autoPlayAnimationDuration: Duration(milliseconds: 500),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            height: MediaQuery.of(context).size.height / 2.5,
+            items: imgList.map((card) {
+              return Builder(builder: (BuildContext context) {
+                return Container(
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    child: Image.network(card, fit: BoxFit.cover),
+                  ),
+                );
+              });
+            }).toList(),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Column(
