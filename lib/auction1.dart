@@ -16,12 +16,12 @@ var list = [
   "four slinder  15000"
 ];
 
-class Auction extends StatefulWidget {
+class Auction1 extends StatefulWidget {
   @override
-  _AuctionState createState() => _AuctionState();
+  _Auction1State createState() => _Auction1State();
 }
 
-class _AuctionState extends State<Auction> {
+class _Auction1State extends State<Auction1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class _AuctionState extends State<Auction> {
             child: Column(
               children: [
                 Text(
-                  'สวนลิ้นจี่คุณจ่า',
+                  'สวนเงาะคุณผึ้ง',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
