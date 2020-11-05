@@ -86,10 +86,7 @@ class _SellhistoryState extends State<Sellhistory> {
                         'price': '30000'
                       }
                     ];
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => Auction()),
-                    // );
+                    
                   },
                   child: Text('ขายแล้ว'),
                 ),

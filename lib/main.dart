@@ -13,7 +13,7 @@ import 'package:fungarden/statusCus.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/add_pro',
+    initialRoute: '/auction',
     routes: {
       '/add_delete': (context) => Adddelete(),
       '/add_product': (context) => AddProduct(),

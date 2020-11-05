@@ -173,6 +173,7 @@ class _AuctionState extends State<Auction> {
             child: RaisedButton(
               color: Color.fromRGBO(56, 163, 165, 10),
               onPressed: () {},
+              
               child: Container(
                 height: 60,
                 child: Padding(
@@ -183,7 +184,9 @@ class _AuctionState extends State<Auction> {
                       Icon(
                         Icons.gavel,
                         color: Colors.white,
+                        size: 30,
                       ),
+                      SizedBox(width: 5,),
                       Text(
                         'ประมูล',
                         style: TextStyle(
