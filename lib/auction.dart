@@ -89,7 +89,10 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text('เหลือเวลา'),
+                          Text(
+                            'เหลือเวลา',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(
                             '10นาที 20วินาที',
                             style: TextStyle(color: Colors.black54),
@@ -99,7 +102,10 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text('ราคาตอนนี้'),
+                          Text(
+                            'ราคาตอนนี้',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(
                             '30000 บาท',
                             style: TextStyle(color: Colors.black54),
@@ -109,7 +115,10 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text('ผู้ประมูลราคาสูงสุด'),
+                          Text(
+                            'ผู้ประมูลราคาสูงสุด',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(
                             'sattha duangmon',
                             style: TextStyle(color: Colors.black54),
@@ -123,32 +132,67 @@ class _AuctionState extends State<Auction> {
               ],
             ),
           ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(130, 0, 0, 0),
+                child: Text(
+                  'ผู้ประมูล',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 65),
+                child: Text(
+                  'มูลค่า',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
           Container(
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.blueAccent)),
             child: SingleChildScrollView(
                 child: Column(
               children: [
                 for (var item in list)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
-                    child: Text(item),
+                    child: Text(
+                      item,
+                      style: TextStyle(color: Colors.black54),
+                    ),
                   ),
               ],
             )),
             width: MediaQuery.of(context).size.width / 1.3,
-            height: 80,
+            height: 70,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 29),
-            child: ButtonTheme(
-              minWidth: MediaQuery.of(context).size.width,
-              child: RaisedButton(
-                color: Color.fromRGBO(56, 163, 165, 10),
-                onPressed: () {},
-                child: Text(
-                  'ประมูล',
-                  style: TextStyle(fontSize: 40),
+          Spacer(),
+          ButtonTheme(
+            minWidth: MediaQuery.of(context).size.width,
+            child: RaisedButton(
+              color: Color.fromRGBO(56, 163, 165, 10),
+              onPressed: () {},
+              child: Container(
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.gavel,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'ประมูล',
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

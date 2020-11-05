@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fungarden/auction.dart';
-import 'package:fungarden/auction1.dart';
 
 class AddP extends StatefulWidget {
   @override
@@ -248,7 +247,7 @@ class _AddPState extends State<AddP> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Auction1()),
+                                                    Auction()),
                                           );
                                         },
                                       ),
