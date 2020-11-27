@@ -96,7 +96,7 @@ class _SellhistoryState extends State<Sellhistory> {
           new Expanded(
               child: new ListView.builder(
             itemCount: farmnum.length,
-            itemBuilder: (BuildContext ctxt, int index) {
+            itemBuilder: (ctxt,  index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: new Card(
