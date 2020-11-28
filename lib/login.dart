@@ -7,24 +7,6 @@ import 'package:http/http.dart' as http;
 class Login extends StatelessWidget {
   String _login = 'http://10.0.2.2:35000/auth/google';
 
-  void login() async {
-    try {
-      http.Response response = await http
-          .post(
-            _login,
-          )
-          .timeout(Duration(seconds: 5));
-
-      if (response.statusCode == 200) {
-        print("success");
-      } else {}
-    } on TimeoutException catch (e) {
-      print('Timeout: $e');
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,7 +154,9 @@ class Login extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, _login);
+                              },
                             ),
                           ),
                         ),
