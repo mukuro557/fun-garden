@@ -1,6 +1,36 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Login extends StatelessWidget {
+String _login = 'http://10.0.2.2:35000/auth/google';
+
+void getUser() async {
+    // create connection client for multiple uses
+    var client = http.Client();
+    try {
+      final response = await client
+          .get(_login)
+          .timeout(
+            Duration(seconds: 5),
+          );
+ 
+      if (response.statusCode == 200) {
+        
+      }
+    } on TimeoutException catch (e) {
+      print('Error: $e');
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      //end the connection and free resources
+      client.close();
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
