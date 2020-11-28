@@ -11,7 +11,6 @@ import 'package:fungarden/productstatus.dart';
 import 'package:fungarden/sellhistory.dart';
 import 'package:fungarden/statusCus.dart';
 
-
 void main() {
   runApp(MaterialApp(
     initialRoute: '/auction',
