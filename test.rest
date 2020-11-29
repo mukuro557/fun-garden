@@ -1,0 +1,19 @@
+
+
+
+POST http://localhost:35000/register
+Content-Type: application/json
+
+{
+    "username":"benz",
+    "password":"1234"
+}
+
+#############
+POST http://localhost:35000/login
+Content-Type: application/json
+
+{
+    "username":"benz",
+    "password":"1234"
+}

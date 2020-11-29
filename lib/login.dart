@@ -16,6 +16,21 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
+  String _url = 'http://10.0.2.2:35000/';
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
+  void showAlert(String message) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Result'),
+          content: Text(message),
+        );
+      },
+    );
+  }
 
   Future<FirebaseUser> _signIn(BuildContext context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -43,7 +58,29 @@ class _LoginState extends State<Login> {
     return userdetail;
   }
 
-
+  _normallogin() async {
+    try {
+      http.Response response = await http.post(
+        _url + 'login',
+        body: {'username': _username.text, 'password': _password.text},
+      ).timeout(Duration(seconds: 5));
+      
+      var res =jsonDecode(response.body) ;
+      if (response.statusCode == 200) {
+        print(res['Role']);
+        if(res['Role'] == 0){
+Navigator.pushNamed(context, "/newmain");
+        }else{}
+        Navigator.pushNamed(context, "/owner");
+      } else {
+        showAlert(response.body.toString());
+      }
+    } on TimeoutException catch (e) {
+      print('Timeout: $e');
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +126,7 @@ class _LoginState extends State<Login> {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _username,
                                     decoration: InputDecoration(
                                       hintText: 'ชื่อผู้ใช้',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -114,6 +152,7 @@ class _LoginState extends State<Login> {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _password,
                                     decoration: InputDecoration(
                                       hintText: 'รหัสผ่าน',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -157,7 +196,9 @@ class _LoginState extends State<Login> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                _normallogin();
+                              },
                             ),
                           ),
                         ),
@@ -170,31 +211,32 @@ class _LoginState extends State<Login> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(44, 10, 44, 5),
                             child: RaisedButton(
-                                elevation: 2.0,
-                                hoverColor: Colors.white,
-                                color: Colors.white,
-                                child: Row(
-                                  children: [
-                                    Image(
-                                        image: AssetImage(
-                                            'assets/images/google.png')),
-                                    SizedBox(
-                                      width: 5,
+                              elevation: 2.0,
+                              hoverColor: Colors.white,
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/images/google.png')),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      "Sign in with Google".toUpperCase(),
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(34, 87, 122, 10),
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        "Sign in with Google".toUpperCase(),
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(34, 87, 122, 10),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () => _signIn(context)
-                                    .then((FirebaseUser user) => print(user)).catchError((e) => print(e)),
-                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () => _signIn(context)
+                                  .then((FirebaseUser user) => print(user))
+                                  .catchError((e) => print(e)),
+                            ),
                           ),
                         ),
                         ButtonTheme(
