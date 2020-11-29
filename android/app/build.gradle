@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.fungarden"
+        applicationId "com.akexorcist.android.fun_gardent"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
@@ -57,7 +57,10 @@ android {
 flutter {
     source '../..'
 }
-
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

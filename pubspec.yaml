@@ -24,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider: ^1.4.1
+  http: ^0.12.2
+  google_sign_in: ^4.5.6
+  firebase_auth: ^0.18.3+1
+  firebase_core: ^0.5.2+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,6 +50,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
 <<<<<<< HEAD
+<<<<<<< HEAD
   assets:
       - asset/image/facebook.png
       - asset/image/google.png
@@ -66,6 +71,11 @@ flutter:
        - assets/images/orange.jpg
        - assets/images/grape.jpg
 >>>>>>> origin/newUI
+=======
+  assets:
+    - assets/images/
+    
+>>>>>>> login
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
