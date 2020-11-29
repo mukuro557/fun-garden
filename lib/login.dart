@@ -1,11 +1,49 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fungarden/auction.dart';
+import 'package:fungarden/profile.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class Login extends StatelessWidget {
-  String _login = 'http://10.0.2.2:35000/auth/google';
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+
+  Future<FirebaseUser> _signIn(BuildContext context) async {
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    FirebaseUser userdetail =
+        (await _firebaseAuth.signInWithCredential(credential)).user;
+    ProviderDetail providerinfo = new ProviderDetail(userdetail.tenantId);
+    List<ProviderDetail> provideData = new List<ProviderDetail>();
+    provideData.add(providerinfo);
+    UserDetail detail = new UserDetail(
+        userdetail.tenantId,
+        userdetail.displayName,
+        userdetail.photoURL,
+        userdetail.email,
+        provideData);
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => Profilescreen(detailUser: detail)));
+    return userdetail;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,32 +170,31 @@ class Login extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(44, 10, 44, 5),
                             child: RaisedButton(
-                              elevation: 2.0,
-                              hoverColor: Colors.white,
-                              color: Colors.white,
-                              child: Row(
-                                children: [
-                                  Image(
-                                      image: AssetImage(
-                                          'assets/images/google.png')),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      "Sign in with Google".toUpperCase(),
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(34, 87, 122, 10),
-                                          fontWeight: FontWeight.bold),
+                                elevation: 2.0,
+                                hoverColor: Colors.white,
+                                color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Image(
+                                        image: AssetImage(
+                                            'assets/images/google.png')),
+                                    SizedBox(
+                                      width: 5,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, _login);
-                              },
-                            ),
+                                    Expanded(
+                                      child: Text(
+                                        "Sign in with Google".toUpperCase(),
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(34, 87, 122, 10),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () => _signIn(context)
+                                    .then((FirebaseUser user) => print(user)).catchError((e) => print(e)),
+                                    ),
                           ),
                         ),
                         ButtonTheme(
@@ -216,4 +253,19 @@ class Login extends StatelessWidget {
       ),
     );
   }
+}
+
+class UserDetail {
+  final String detailprovide;
+  final String username;
+  final String photouri;
+  final String userEmail;
+  final List<ProviderDetail> provideData;
+  UserDetail(this.detailprovide, this.username, this.photouri, this.userEmail,
+      this.provideData);
+}
+
+class ProviderDetail {
+  ProviderDetail(this.detailprovide);
+  final String detailprovide;
 }

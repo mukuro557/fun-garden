@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "526880647447",
+    "firebase_url": "https://my-project-mukuro.firebaseio.com",
+    "project_id": "my-project-mukuro",
+    "storage_bucket": "my-project-mukuro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526880647447:android:14d9beb72071552a1f2f52",
+        "android_client_info": {
+          "package_name": "com.meafah.fungarden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526880647447-j6b78g778chdcuofvl0s7i3a5ihfb59q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvf2QCSGrPpnkddIqa9NAt2UKoS0Spvik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526880647447-j6b78g778chdcuofvl0s7i3a5ihfb59q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

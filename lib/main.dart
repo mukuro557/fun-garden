@@ -12,8 +12,13 @@ import 'package:fungarden/owner.dart';
 import 'package:fungarden/productstatus.dart';
 import 'package:fungarden/sellhistory.dart';
 import 'package:fungarden/statusCus.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:fungarden/auction.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     initialRoute: '/login',
     routes: {
@@ -33,3 +38,4 @@ void main() {
     },
   ));
 }
+
