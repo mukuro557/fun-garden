@@ -6,12 +6,12 @@ class Landingpage extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("assets/images/greenbg.jpg"), fit: BoxFit.cover),
+            image: AssetImage("asset/image/greenbg.jpg"), fit: BoxFit.cover),
       ),
       child: Column(
         children: [
           Spacer(),
-          Container(child: Image.asset('assets/images/logo12.png', width: 150,)),
+          Container(child: Image.asset('asset/image/logo12.png', width: 150,)),
           Column(
             children: [
               Text('fun garden'.toUpperCase(),

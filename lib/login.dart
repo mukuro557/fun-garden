@@ -13,7 +13,7 @@ class Login extends StatelessWidget {
                 child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 30, 0, 5),
               child: Text(
-                'เข้าสู่ระบบ',
+                'ลงชื่อเข้าใช้',
                 style: TextStyle(
                     color: Color.fromRGBO(34, 87, 122, 10),
                     fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class Login extends StatelessWidget {
                             children: [
                               Spacer(),
                               Text(
-                                'ลืมรหัสผ่าน?',
+                                ' ลืมรหัสผ่าน?',
                                 style: TextStyle(
                                   color: Color.fromRGBO(34, 87, 122, 10),
                                 ),
@@ -131,9 +131,7 @@ class Login extends StatelessWidget {
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(
-                                      image: AssetImage(
-                                          'assets/images/google.png')),
+                                  Image(image: AssetImage('assets/images/google.png')),
                                   SizedBox(
                                     width: 5,
                                   ),
@@ -166,9 +164,7 @@ class Login extends StatelessWidget {
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(
-                                      image: AssetImage(
-                                          'assets/images/facebook.png')),
+                                  Image(image: AssetImage('assets/images/facebook.png')),
                                   SizedBox(
                                     width: 10,
                                   ),
