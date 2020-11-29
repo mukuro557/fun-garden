@@ -26,8 +26,7 @@ class _AuctionState extends State<Auction> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(56, 163, 165, 10),
-        title: Text('Fun garden'),
+        title: Text('Title'),
       ),
       body: Column(
         children: [
@@ -53,11 +52,12 @@ class _AuctionState extends State<Auction> {
             child: Column(
               children: [
                 Text(
-                  'สวนลิ้นจี่คุณจ่า',
+
+                  'สวนยายดา-เจ๊บุญชื่น',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
-                  '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย 57100',
+                  'เลขที่ 30 เขายายดา ตำบลตะพง อำเภอเมือง ระยอง 21000',
                   style: TextStyle(color: Colors.black54),
                 ),
                 Row(
@@ -89,10 +89,7 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text(
-                            'เหลือเวลา',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text('เหลือเวลา'),
                           Text(
                             '10นาที 20วินาที',
                             style: TextStyle(color: Colors.black54),
@@ -102,10 +99,7 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text(
-                            'ราคาตอนนี้',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text('ราคาตอนนี้'),
                           Text(
                             '30000 บาท',
                             style: TextStyle(color: Colors.black54),
@@ -115,10 +109,7 @@ class _AuctionState extends State<Auction> {
                       Spacer(),
                       Column(
                         children: [
-                          Text(
-                            'ผู้ประมูลราคาสูงสุด',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text('ผู้ประมูลราคาสูงสุด'),
                           Text(
                             'sattha duangmon',
                             style: TextStyle(color: Colors.black54),
@@ -132,70 +123,33 @@ class _AuctionState extends State<Auction> {
               ],
             ),
           ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(130, 0, 0, 0),
-                child: Text(
-                  'ผู้ประมูล',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 65),
-                child: Text(
-                  'มูลค่า',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
+
           Container(
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.blueAccent)),
             child: SingleChildScrollView(
                 child: Column(
               children: [
                 for (var item in list)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
-                    child: Text(
-                      item,
-                      style: TextStyle(color: Colors.black54),
-                    ),
+                    child: Text(item),
                   ),
               ],
             )),
             width: MediaQuery.of(context).size.width / 1.3,
-            height: 70,
+
+            height: 80,
           ),
-          Spacer(),
-          ButtonTheme(
-            minWidth: MediaQuery.of(context).size.width,
-            child: RaisedButton(
-              color: Color.fromRGBO(56, 163, 165, 10),
-              onPressed: () {},
-              
-              child: Container(
-                height: 60,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.gavel,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      SizedBox(width: 5,),
-                      Text(
-                        'ประมูล',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ],
-                  ),
+          Padding(
+            padding: const EdgeInsets.only(top: 29),
+            child: ButtonTheme(
+              minWidth: MediaQuery.of(context).size.width,
+              child: RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  'ประมูล',
+                  style: TextStyle(fontSize: 40),
                 ),
               ),
             ),
