@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:fungarden/auction.dart';
 import 'package:fungarden/profile.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 
 class Login extends StatefulWidget {
   @override
@@ -64,14 +64,13 @@ class _LoginState extends State<Login> {
         _url + 'login',
         body: {'username': _username.text, 'password': _password.text},
       ).timeout(Duration(seconds: 5));
-      
-      var res =jsonDecode(response.body) ;
+
+      var res = jsonDecode(response.body);
       if (response.statusCode == 200) {
         print(res['Role']);
-        if(res['Role'] == 0){
-Navigator.pushNamed(context, "/newmain");
-        }else{}
-        Navigator.pushNamed(context, "/owner");
+     
+          Navigator.pushNamed(context, "/newmain");
+        
       } else {
         showAlert(response.body.toString());
       }
@@ -216,7 +215,9 @@ Navigator.pushNamed(context, "/newmain");
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(image: AssetImage('assets/images/google.png')),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/images/google.png')),
                                   SizedBox(
                                     width: 5,
                                   ),
@@ -251,7 +252,9 @@ Navigator.pushNamed(context, "/newmain");
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(image: AssetImage('assets/images/facebook.png')),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/images/facebook.png')),
                                   SizedBox(
                                     width: 10,
                                   ),

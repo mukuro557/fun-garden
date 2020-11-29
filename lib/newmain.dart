@@ -56,26 +56,17 @@ class _NewmainPageState extends State<NewmainPage> {
                 icon: Icon(Icons.home, color: Colors.black),
                 text: 'หน้าแรก',
               ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Tab(
-                  icon: Icon(Icons.shopping_cart, color: Colors.black),
-                  text: ('รถเข็น'),
-                ),
+              Tab(
+                icon: Icon(Icons.shopping_cart, color: Colors.black),
+                text: ('รถเข็น'),
               ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Tab(
-                  icon: Icon(Icons.local_shipping, color: Colors.black),
-                  text: 'ขนส่ง',
-                ),
+              Tab(
+                icon: Icon(Icons.local_shipping, color: Colors.black),
+                text: 'ขนส่ง',
               ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Tab(
-                  icon: Icon(Icons.person, color: Colors.black),
-                  text: 'ฉัน',
-                ),
+              Tab(
+                icon: Icon(Icons.person, color: Colors.black),
+                text: 'ฉัน',
               ),
             ],
           ),
