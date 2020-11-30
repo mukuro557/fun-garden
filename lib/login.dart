@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -31,6 +30,8 @@ class _LoginState extends State<Login> {
       },
     );
   }
+
+  
 
   Future<FirebaseUser> _signIn(BuildContext context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -64,13 +65,14 @@ class _LoginState extends State<Login> {
         _url + 'login',
         body: {'username': _username.text, 'password': _password.text},
       ).timeout(Duration(seconds: 5));
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      SharedPreferences iduser = await SharedPreferences.getInstance();
       var res = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        print(res['Role']);
-     
-          Navigator.pushNamed(context, "/newmain");
-        
+        prefs.setString("name", res['Username']);
+        iduser.setInt("id", res['User_id']);
+
+        Navigator.pushNamed(context, "/newmain");
       } else {
         showAlert(response.body.toString());
       }

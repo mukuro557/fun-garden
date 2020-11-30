@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewmainPage extends StatefulWidget {
   @override
@@ -7,10 +11,30 @@ class NewmainPage extends StatefulWidget {
 
 class _NewmainPageState extends State<NewmainPage> {
   int _gValue = 0;
+  String name = '';
+  String _url = 'http://10.0.2.2:35000/';
   void changeRadio(int value) {
     setState(() {
       _gValue = value;
     });
+  }
+
+  void showAlert(String message) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Result'),
+          content: Text(message),
+        );
+      },
+    );
+  }
+
+  _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('name');
+    Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
   }
 
   final List fruit = [
@@ -19,24 +43,68 @@ class _NewmainPageState extends State<NewmainPage> {
       'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
       'image': 'rambutan.jpg'
     },
-    {
-      'name': 'สวนส้มป้าจี้ด',
-      'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
-      'image': 'orange.jpg'
-    },
-    {
-      'name': 'สวนองุ่นน้าแวว',
-      'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
-      'image': 'grape.jpg'
-    }
   ];
-  Future<void> refresh() async {
-    await Future.delayed(Duration(seconds: 2));
+
+  _userinfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      fruit.add(
-        {'name': 'Kiwi', 'price': 14, 'image': 'rambutan.jpg'},
-      );
+      name = prefs.getString('name');
     });
+  }
+
+  _getallfriut() async {
+    try {
+      http.Response response = await http
+          .get(
+            _url + 'allfruit',
+          )
+          .timeout(Duration(seconds: 5));
+      var res = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        double county = res[0].length / 6;
+        int count = county.toInt();
+
+        for (int i = 0; i < count; i++) {
+          String idsen = (res[i]['Farm_id']).toString();
+          print(idsen);
+          try {
+            http.Response responses = await http.post(_url + 'allfruit',
+                body: {"id": idsen}).timeout(Duration(seconds: 5));
+            var respon = responses.body;
+
+            setState(() {
+              var reson = jsonDecode(respon);
+
+              fruit.add(
+                {
+                  'name': reson[0]['Farm_name'],
+                  'location': reson[0]['Address'],
+                  'image': 'rambutan.jpg'
+                },
+              );
+            });
+          } on TimeoutException catch (e) {
+            print('Timeout: $e');
+          } catch (e) {
+            print('Error: $e');
+          }
+        }
+      } else {
+        showAlert(response.body.toString());
+      }
+    } on TimeoutException catch (e) {
+      print('Timeout: $e');
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _getallfriut();
+    _userinfo();
   }
 
   @override
@@ -167,13 +235,15 @@ class _NewmainPageState extends State<NewmainPage> {
                   height: 10,
                 ),
                 Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: refresh,
-                    child: ListView.builder(
-                      itemCount: fruit.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: fruit.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/auction");
+                          },
                           child: Card(
                             child: Column(
                               children: [
@@ -229,9 +299,9 @@ class _NewmainPageState extends State<NewmainPage> {
                               ],
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 )
               ],
@@ -326,13 +396,17 @@ class _NewmainPageState extends State<NewmainPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                           
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text('รวมทั้งหมด'),
                             ),
                             Spacer(),
-                            Text('101,000 บาท',style: TextStyle(color: Color.fromRGBO(56, 163, 165, 10),),)
+                            Text(
+                              '101,000 บาท',
+                              style: TextStyle(
+                                color: Color.fromRGBO(56, 163, 165, 10),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -342,7 +416,10 @@ class _NewmainPageState extends State<NewmainPage> {
                       height: 50,
                       child: RaisedButton(
                         onPressed: () {},
-                        child: Text('จ่ายทั้งหมด',style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          'จ่ายทั้งหมด',
+                          style: TextStyle(color: Colors.white),
+                        ),
                         color: Color.fromRGBO(56, 163, 165, 10),
                       ),
                     ),
@@ -380,7 +457,7 @@ class _NewmainPageState extends State<NewmainPage> {
                           ),
                         ),
                         Text(
-                          'คุณ ทาทา',
+                          name,
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         )
                       ],
@@ -492,7 +569,9 @@ class _NewmainPageState extends State<NewmainPage> {
                           height: 50,
                           child: RaisedButton(
                             color: Colors.white,
-                            onPressed: () {},
+                            onPressed: () {
+                              _logout();
+                            },
                             child: Text(
                               'ออกจากระบบ',
                               style: TextStyle(color: Colors.red),
