@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fungarden/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:fungarden/profile.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -13,8 +11,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = new GoogleSignIn();
   String _url = 'http://10.0.2.2:35000/';
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -32,35 +28,9 @@ class _LoginState extends State<Login> {
   }
 
   Future<void> signOutGoogle() async {
-    await _googleSignIn.signOut();
+    await signOutGoogle();
 
     print("User Signed Out");
-  }
-
-  Future<FirebaseUser> _signIn(BuildContext context) async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    FirebaseUser userdetail =
-        (await _firebaseAuth.signInWithCredential(credential)).user;
-    ProviderDetail providerinfo = new ProviderDetail(userdetail.tenantId);
-    List<ProviderDetail> provideData = new List<ProviderDetail>();
-    provideData.add(providerinfo);
-    UserDetail detail = new UserDetail(
-        userdetail.tenantId,
-        userdetail.displayName,
-        userdetail.photoURL,
-        userdetail.email,
-        provideData);
-    Navigator.push(
-        context,
-        new MaterialPageRoute(
-            builder: (context) => Profilescreen(detailUser: detail)));
-    return userdetail;
   }
 
   _normallogin() async {
@@ -85,6 +55,18 @@ class _LoginState extends State<Login> {
     } catch (e) {
       print('Error: $e');
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // signInWithGoogle().then(
+    //   (result) {
+    //     if (result != null) {
+    //       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    //     }
+    //   },
+    // );
   }
 
   @override
@@ -238,9 +220,16 @@ class _LoginState extends State<Login> {
                                   ),
                                 ],
                               ),
-                              onPressed: () => _signIn(context)
-                                  .then((FirebaseUser user) => print(user))
-                                  .catchError((e) => print(e)),
+                              onPressed: () {
+                                signInWithGoogle().then(
+                                  (result) {
+                                    if (result != null) {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context, '/home', (route) => false);
+                                    }
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ),
