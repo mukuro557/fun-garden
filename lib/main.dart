@@ -25,7 +25,6 @@ void main() async {
     initialRoute: '/login',
     routes: {
       '/add_delete': (context) => Adddelete(),
-     
       '/add_product': (context) => AddProduct(),
       '/add_pro': (context) => AddP(),
       '/auction': (context) => NewAuction(),

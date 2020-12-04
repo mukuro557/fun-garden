@@ -31,7 +31,11 @@ class _LoginState extends State<Login> {
     );
   }
 
-  
+  Future<void> signOutGoogle() async {
+    await _googleSignIn.signOut();
+
+    print("User Signed Out");
+  }
 
   Future<FirebaseUser> _signIn(BuildContext context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -273,6 +277,42 @@ class _LoginState extends State<Login> {
                               ),
                               onPressed: () {},
                             ),
+                          ),
+                        ),
+                        ButtonTheme(
+                          minWidth: 300.0,
+                          height: 50,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(44, 10, 44, 5),
+                            child: RaisedButton(
+                                elevation: 2.0,
+                                hoverColor: Colors.white,
+                                color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Image(
+                                        image: AssetImage(
+                                            'assets/images/google.png')),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        "Sign out with Google".toUpperCase(),
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(34, 87, 122, 10),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  signOutGoogle();
+                                }),
                           ),
                         ),
                       ],
