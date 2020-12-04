@@ -225,7 +225,7 @@ class _LoginState extends State<Login> {
                                   (result) {
                                     if (result != null) {
                                       Navigator.pushNamedAndRemoveUntil(
-                                          context, '/home', (route) => false);
+                                          context, '/newmain', (route) => false);
                                     }
                                   },
                                 );
