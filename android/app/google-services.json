@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "344158278015-n9o9dgt71813nse6aorpvcpdvmbp34k7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fungarden",
+            "certificate_hash": "e2ce4ab0aee52f5bfc3c820026db0f11312de400"
+          }
+        },
+        {
           "client_id": "344158278015-1r3u48smhhbv20676abf4o2mcnulk196.apps.googleusercontent.com",
           "client_type": 3
         }
