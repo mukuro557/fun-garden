@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fungarden/adddelete_farm.dart';
 import 'package:fungarden/addpro.dart';
 import 'package:fungarden/addproduct.dart';
-import 'package:fungarden/auction.dart';
 import 'package:fungarden/auctionpro.dart';
 import 'package:fungarden/history.dart';
 import 'package:fungarden/login.dart';
@@ -15,7 +14,6 @@ import 'package:fungarden/sellhistory.dart';
 import 'package:fungarden/statusCus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fungarden/auction.dart';
 
 
 void main() async {
