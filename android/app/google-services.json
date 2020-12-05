@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "344158278015-tm4kjbd2hl5bmsjnlog6aq0ra0n3a23b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fungarden",
+            "certificate_hash": "e19666101466aaa1568691d172065fe57254f0bd"
+          }
+        },
+        {
           "client_id": "344158278015-1r3u48smhhbv20676abf4o2mcnulk196.apps.googleusercontent.com",
           "client_type": 3
         }
