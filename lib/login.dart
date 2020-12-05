@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:fungarden/auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:fungarden/auction.dart';
-import 'package:fungarden/profile.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -14,8 +11,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = new GoogleSignIn();
   String _url = 'http://10.0.2.2:35000/';
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -32,30 +27,10 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Future<FirebaseUser> _signIn(BuildContext context) async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    FirebaseUser userdetail =
-        (await _firebaseAuth.signInWithCredential(credential)).user;
-    ProviderDetail providerinfo = new ProviderDetail(userdetail.tenantId);
-    List<ProviderDetail> provideData = new List<ProviderDetail>();
-    provideData.add(providerinfo);
-    UserDetail detail = new UserDetail(
-        userdetail.tenantId,
-        userdetail.displayName,
-        userdetail.photoURL,
-        userdetail.email,
-        provideData);
-    Navigator.push(
-        context,
-        new MaterialPageRoute(
-            builder: (context) => Profilescreen(detailUser: detail)));
-    return userdetail;
+  Future<void> signOutGoogle() async {
+    await signOutGoogle();
+
+    print("User Signed Out");
   }
 
   _normallogin() async {
@@ -64,14 +39,15 @@ class _LoginState extends State<Login> {
         _url + 'login',
         body: {'username': _username.text, 'password': _password.text},
       ).timeout(Duration(seconds: 5));
-      
-      var res =jsonDecode(response.body) ;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      SharedPreferences iduser = await SharedPreferences.getInstance();
+      var res = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        print(res['Role']);
-        if(res['Role'] == 0){
-Navigator.pushNamed(context, "/newmain");
-        }else{}
-        Navigator.pushNamed(context, "/owner");
+        prefs.setString("name", res['Username']);
+        iduser.setInt("id", res['User_id']);
+
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/newmain', (route) => false);
       } else {
         showAlert(response.body.toString());
       }
@@ -80,6 +56,11 @@ Navigator.pushNamed(context, "/newmain");
     } catch (e) {
       print('Error: $e');
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -216,7 +197,9 @@ Navigator.pushNamed(context, "/newmain");
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(image: AssetImage('assets/images/google.png')),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/images/google.png')),
                                   SizedBox(
                                     width: 5,
                                   ),
@@ -231,9 +214,16 @@ Navigator.pushNamed(context, "/newmain");
                                   ),
                                 ],
                               ),
-                              onPressed: () => _signIn(context)
-                                  .then((FirebaseUser user) => print(user))
-                                  .catchError((e) => print(e)),
+                              onPressed: () {
+                                signInWithGoogle().then(
+                                  (result) {
+                                    if (result != null) {
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          '/newmain', (route) => false);
+                                    }
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -251,7 +241,9 @@ Navigator.pushNamed(context, "/newmain");
                               color: Colors.white,
                               child: Row(
                                 children: [
-                                  Image(image: AssetImage('assets/images/facebook.png')),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/images/facebook.png')),
                                   SizedBox(
                                     width: 10,
                                   ),

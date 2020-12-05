@@ -50,10 +50,12 @@ class _AuctionProductState extends State<AuctionProduct> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
+                                  left: 20, top: 20, right: 0),
                               child: Row(
                                 children: [
                                   Ink(
@@ -67,8 +69,12 @@ class _AuctionProductState extends State<AuctionProduct> {
                                       onPressed: () {},
                                     ),
                                   ),
+                                  
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 12),
+                                    child: Text('ประมูลสำเร็จ'),
+                                  ),
                                   Spacer(),
-                                  Text('ประมูลสำเร็จ')
                                 ],
                               ),
                             ),
@@ -182,7 +188,7 @@ class _AuctionProductState extends State<AuctionProduct> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 15, top: 20, right: 340),
+                                  left: 15, top: 20, right: 0),
                               child: Row(
                                 children: [
                                   Ink(
@@ -196,8 +202,12 @@ class _AuctionProductState extends State<AuctionProduct> {
                                       onPressed: () {},
                                     ),
                                   ),
+                                  
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text('ประมูลสำเร็จ'),
+                                  ),
                                   Spacer(),
-                                  Text('ประมูลสำเร็จ')
                                 ],
                               ),
                             ),
@@ -249,7 +259,7 @@ class _AuctionProductState extends State<AuctionProduct> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(bottom: 20, left: 230),
+                                  const EdgeInsets.only( left: 230),
                               child: Column(
                                 children: [
                                   Text('ราคา 5,500 บาท',

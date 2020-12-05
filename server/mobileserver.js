@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 // profle
 app.use("/profile", profileRoutes);
- 
-app.get("/welcome", function(req, res) {
+
+app.get("/welcome", function (req, res) {
     res.send("Welcome to you!");
 });
 
@@ -25,22 +25,22 @@ app.get("/welcome", function(req, res) {
 app.post("/login", function (req, res) {
     const username = req.body.username;
     const password = req.body.password;
- 
-    const sql = "SELECT Password,Role,Username FROM user WHERE Username = ?";
+
+    const sql = "SELECT * FROM user WHERE Username = ?";
     con.query(sql, [username], function (err, result, fields) {
         if (err) {
             console.error(err.message);
             res.status(500).send("Database server error");
             return;
         }
- 
+
         const numrows = result.length;
         //if no data
         if (numrows == 0) {
             res.status(400).send("Login failed");
         }
         else {
-            
+
             bcrypt.compare(password, result[0].Password, function (err, resp) {
                 if (err) {
                     console.log(result[0])
@@ -48,7 +48,7 @@ app.post("/login", function (req, res) {
                     res.status(500).send("Password matching error");
                     return;
                 }
- 
+
                 if (resp == true) {
                     //correct login
                     res.json(result[0]);
@@ -65,7 +65,7 @@ app.post("/login", function (req, res) {
 app.post("/register", function (req, res) {
     const username = req.body.username;
     const password = req.body.password;
- 
+
     //checked existing username
     let sql = "SELECT User_id FROM user WHERE Username=?";
     con.query(sql, [username], function (err, result, fields) {
@@ -74,7 +74,7 @@ app.post("/register", function (req, res) {
             res.status(500).send("Database server error");
             return;
         }
- 
+
         const numrows = result.length;
         //if repeated username
         if (numrows > 0) {
@@ -90,7 +90,7 @@ app.post("/register", function (req, res) {
                         res.status(500).send("Database server error");
                         return;
                     }
- 
+
                     const numrows = result.affectedRows;
                     if (numrows != 1) {
                         res.status(500).send("Insert failed");
@@ -103,8 +103,68 @@ app.post("/register", function (req, res) {
         }
     });
 });
- 
+app.post("/fruit_info", function (req, res) {
+    const id = req.body.id;
+    let sql = "SELECT * FROM sell WHERE Sell_id=?";
+    con.query(sql, [username], function (err, result, fields) {
+
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Database server error");
+            return;
+        }
+        const numrows = result.affectedRows;
+        if (numrows < 1) {
+            res.status(500).send("no information");
+        }
+        else {
+            res.json(result);
+        }
+    })
+});
+
+app.get("/allfruit", function (req, res) {
+    let sql = "SELECT * FROM sell ";
+    con.query(sql, function (err, result, fields) {
+
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Database server error");
+            return;
+        }
+        const numrows = result.affectedRows;
+        if (numrows < 1) {
+            res.status(500).send("no information");
+        }
+        else {
+            res.json(result);
+            console.log(result);
+        }
+    })
+});
+
+app.post("/allfarminfo", function (req, res) {
+    const id = req.body.id;
+    let sql = "SELECT * FROM farm WHERE Farm_id = ? ";
+    con.query(sql,[id], function (err, result, fields) {
+
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Database server error");
+            return;
+        }
+        const numrows = result.affectedRows;
+        if (numrows < 1) {
+            res.status(500).send("no information");
+        }
+        else {
+            res.json(result);
+            console.log(result);
+        }
+    })
+});
+
 const port = process.env.PORT || 35000;
-app.listen(port, function(){
+app.listen(port, function () {
     console.log("Server is ready at " + port);
 });
