@@ -95,6 +95,7 @@ class _FirstpageState extends State<Firstpage> {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
@@ -112,6 +113,7 @@ class _FirstpageState extends State<Firstpage> {
                       Text('มาแรง')
                     ],
                   ),
+                  SizedBox(width: 20,),
                   Column(
                     children: [
                       MaterialButton(
@@ -129,6 +131,7 @@ class _FirstpageState extends State<Firstpage> {
                       Text('ใกล้สุด')
                     ],
                   ),
+                  SizedBox(width: 20,),
                   Column(
                     children: [
                       MaterialButton(
@@ -145,6 +148,7 @@ class _FirstpageState extends State<Firstpage> {
                       Text('ราคาดี')
                     ],
                   ),
+                  SizedBox(width: 20,),
                   Column(
                     children: [
                       MaterialButton(
@@ -192,58 +196,63 @@ class _FirstpageState extends State<Firstpage> {
                         Navigator.pushNamed(context, "/auction");
                       },
                       child: Card(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(9.0),
-                              child: Container(
-                                child: Image.asset(
-                                  'assets/images/' + fruit[index]['image'],
-                                  height: 200,
+                        child: Container(
+                          width: 200,
+                          height: 350,
+                          color: Colors.red,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(9.0),
+                                child: Container(
+                                  child: Image.asset(
+                                    'assets/images/' + fruit[index]['image'],
+                                    height: 200,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Column(
-                              children: [
-                                Text(fruit[index]['name']),
-                                Text('${fruit[index]['location']} '),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.alarm,
-                                        size: 20,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text('00:59:34'),
-                                    ],
+                              Column(
+                                children: [
+                                  Text(fruit[index]['name']),
+                                  Text('${fruit[index]['location']} '),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.alarm,
+                                          size: 20,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text('00:59:34'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/auction.png',
-                                        width: 20,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text('5000 บาท'),
-                                      Spacer(),
-                                      Icon(Icons.people),
-                                      Text('10 คน')
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/auction.png',
+                                          width: 20,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text('5000 บาท'),
+                                        Spacer(),
+                                        Icon(Icons.people),
+                                        Text('10 คน')
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -85,25 +85,25 @@ class _NewmainPageState extends State<NewmainPage> {
           backgroundColor: Color.fromRGBO(56, 163, 165, 10),
         ),
         bottomNavigationBar: Container(
-          color: Colors.grey,
+          color: Colors.white,
           height: 60,
           child: TabBar(
             tabs: [
               Tab(
                 icon: Icon(Icons.home, color: Colors.black),
-                text: 'หน้าแรก',
+                child: Text('หน้าแรก',style: TextStyle(color: Colors.black),),
               ),
               Tab(
                 icon: Icon(Icons.shopping_cart, color: Colors.black),
-                text: ('รถเข็น'),
+                child: Text('รถเข็น',style: TextStyle(color: Colors.black),),
               ),
               Tab(
                 icon: Icon(Icons.local_shipping, color: Colors.black),
-                text: 'ขนส่ง',
+                child: Text('ขนส่ง',style: TextStyle(color: Colors.black),),
               ),
               Tab(
                 icon: Icon(Icons.person, color: Colors.black),
-                text: 'ฉัน',
+                child: Text('ฉัน',style: TextStyle(color: Colors.black),),
               ),
             ],
           ),
