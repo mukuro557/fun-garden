@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-
 class Firstpage extends StatefulWidget {
   @override
   _FirstpageState createState() => _FirstpageState();
@@ -13,11 +12,13 @@ class _FirstpageState extends State<Firstpage> {
   final List fruit = [
     {
       'name': 'สวนเงาะลุงจ่า',
+      'id':'1',
       'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
       'image': 'rambutan.jpg'
     },
   ];
   String _url = 'http://10.0.2.2:35000/';
+
   _getallfriut() async {
     try {
       http.Response response = await http
@@ -26,28 +27,27 @@ class _FirstpageState extends State<Firstpage> {
           )
           .timeout(Duration(seconds: 5));
       var res = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
-        double county = res[0].length / 6;
+        double county = res[0].length / 8;
         int count = county.toInt();
 
         for (int i = 0; i < count; i++) {
-          String idsen = (res[i]['Farm_id']).toString();
+          String idsen = (res[i]['Sell_id']).toString();
           print(idsen);
           try {
-            http.Response responses = await http.post(_url + 'allfruit',
+            http.Response responses = await http.post(_url + 'image',
                 body: {"id": idsen}).timeout(Duration(seconds: 5));
             var respon = responses.body;
-
+            
             setState(() {
               var reson = jsonDecode(respon);
 
-              fruit.add(
-                {
-                  'name': reson[0]['Farm_name'],
-                  'location': reson[0]['Address'],
-                  'image': 'rambutan.jpg'
-                },
-              );
+              fruit[i]['name'] = res[i]['Farm_name'];
+              fruit[i]['location'] = res[i]['Address'];
+              fruit[i]['image'] = reson[i]['Image'];
+              fruit[i]['id'] = res[i]['id'];
+              fruit.add({});
             });
           } on TimeoutException catch (e) {
             print('Timeout: $e');
@@ -65,7 +65,7 @@ class _FirstpageState extends State<Firstpage> {
     }
   }
 
-    void showAlert(String message) async {
+  void showAlert(String message) async {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -183,7 +183,7 @@ class _FirstpageState extends State<Firstpage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: fruit.length,
+                itemCount: fruit.length-1,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -197,8 +197,8 @@ class _FirstpageState extends State<Firstpage> {
                             Padding(
                               padding: const EdgeInsets.all(9.0),
                               child: Container(
-                                child: Image.asset(
-                                  'assets/images/' + fruit[index]['image'],
+                                child: Image.network(
+                                   fruit[index]['image'],
                                   height: 200,
                                 ),
                               ),
