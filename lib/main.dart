@@ -8,14 +8,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 
-void main() async {
+void main() 
+// {
+  // runApp(MaterialApp(
+  //   home: Firstpage(),
+  // ));
+async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
     initialRoute: '/login',
     routes: {
-
-
       '/auction': (context) => NewAuction(),
       '/auction_pro': (context) => AuctionProduct(),
       '/owner': (context) => Owner(),

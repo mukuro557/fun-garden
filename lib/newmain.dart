@@ -43,13 +43,12 @@ class _NewmainPageState extends State<NewmainPage> {
     prefs.remove('name');
     pic.remove('picture');
     setState(() {
-      picture = 'https://img2.thaipng.com/20180401/klw/kisspng-user-profile-computer-icons-clip-art-profile-5ac092f6f2d337.1560498715225699749946.jpg';
+      picture =
+          'https://img2.thaipng.com/20180401/klw/kisspng-user-profile-computer-icons-clip-art-profile-5ac092f6f2d337.1560498715225699749946.jpg';
     });
     await signOutGoogle();
     Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
   }
-
-
 
   _userinfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -66,13 +65,11 @@ class _NewmainPageState extends State<NewmainPage> {
     }
   }
 
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    
+
     _userinfo();
   }
 
@@ -81,29 +78,57 @@ class _NewmainPageState extends State<NewmainPage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(56, 163, 165, 10),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Color.fromRGBO(56, 163, 165, 10),
+        // ),
         bottomNavigationBar: Container(
-          color: Colors.grey,
-          height: 60,
+          color: Colors.white,
+          height: 80,
           child: TabBar(
             tabs: [
               Tab(
-                icon: Icon(Icons.home, color: Colors.black),
-                text: 'หน้าแรก',
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                child: Text(
+                  'หน้าแรก',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               Tab(
-                icon: Icon(Icons.shopping_cart, color: Colors.black),
-                text: ('รถเข็น'),
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                child: Text(
+                  'รถเข็น',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               Tab(
-                icon: Icon(Icons.local_shipping, color: Colors.black),
-                text: 'ขนส่ง',
+                icon: Icon(
+                  Icons.local_shipping,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                child: Text(
+                  'ขนส่ง',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               Tab(
-                icon: Icon(Icons.person, color: Colors.black),
-                text: 'ฉัน',
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                child: Text(
+                  'ฉัน',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
