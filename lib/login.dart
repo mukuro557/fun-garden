@@ -42,11 +42,12 @@ class _LoginState extends State<Login> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       SharedPreferences iduser = await SharedPreferences.getInstance();
       var res = jsonDecode(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && res.length > 0) {
         prefs.setString("name", res['Username']);
         iduser.setInt("id", res['User_id']);
+        print(res);
 
-        Navigator.pushNamedAndRemoveUntil(
+         Navigator.pushNamedAndRemoveUntil(
             context, '/newmain', (route) => false);
       } else {
         showAlert(response.body.toString());

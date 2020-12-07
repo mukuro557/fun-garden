@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 
 
 void main() 
-// {
-  // runApp(MaterialApp(
-  //   home: Firstpage(),
-  // ));
+
 async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

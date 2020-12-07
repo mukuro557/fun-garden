@@ -18,20 +18,39 @@ class _FirstpageState extends State<Firstpage> {
       'price': '5000',
       'date_end': '6/12/2020',
       'left': '00:00:00',
+      'time': 50
     },
   ];
   String _url = 'http://10.0.2.2:35000/';
   DateTime todaay = DateTime.now();
 
+  int top;
+
   _reduce() {
+    for (int i = 0; i < fruit.length - 1; i++) {
+      if (top == null || top < fruit[i]['time']) {
+        setState(() {
+          top = fruit[i]['time'];
+        });
+      }
+    }
+
     Timer.periodic(Duration(minutes: 1), (timer) {
+      top--;
       for (int i = 0; i < fruit.length - 1; i++) {
-        DateTime end = DateTime.parse(fruit[i]['date_end']);
-        int total = todaay.difference(end).inMilliseconds * -1;
-        int minutefi = (total ~/ 6000) % 60;
-        int hourfi = (total ~/ 360000) % 60;
-        print('00:$hourfi:$minutefi');
-        fruit[i]['left'] = '00:$hourfi:$minutefi';
+        setState(() {
+          todaay = DateTime.now();
+          DateTime end = DateTime.parse(fruit[i]['date_end']);
+          int total = todaay.difference(end).inMinutes * -1;
+          int minutefi = total % 60;
+          int hourfi = total ~/ 60;
+          fruit[i]['left'] = '00:$hourfi:$minutefi';
+        });
+
+        print(top);
+      }
+      if (top <= 0) {
+        return timer.cancel();
       }
     });
   }
@@ -60,16 +79,19 @@ class _FirstpageState extends State<Firstpage> {
             var date = res[0]['Date_end'];
             DateTime end = DateTime.parse(date);
             todaay.difference(end).inHours;
-            int total = todaay.difference(end).inMilliseconds * -1;
-            int minutefi = (total ~/ 6000) % 60;
-            int hourfi = (total ~/ 360000) % 60;
+            int total = todaay.difference(end).inMinutes * -1;
+            int minutefi = total % 60;
+            int hourfi = total ~/ 60;
             setState(() {
               fruit[i]['name'] = res[0]['Farm_name'];
               fruit[i]['location'] = res[0]['Address'];
               fruit[i]['image'] = reson[0]['Image'];
               fruit[i]['date_end'] = res[0]['Date_end'];
+              fruit[i]['price'] = res[0]['Price'];
               fruit[i]['id'] = res[0]['id'];
               fruit[i]['left'] = '00:$hourfi:$minutefi';
+              fruit[i]['time'] = total;
+
               fruit.add({});
             });
           } on TimeoutException catch (e) {
@@ -78,6 +100,7 @@ class _FirstpageState extends State<Firstpage> {
             print('Error: $e');
           }
         }
+        _reduce();
       } else {
         showAlert(response.body.toString());
       }
@@ -105,7 +128,6 @@ class _FirstpageState extends State<Firstpage> {
     // TODO: implement initState
     super.initState();
     _getallfriut();
-    _reduce();
   }
 
   @override
@@ -308,94 +330,75 @@ class _FirstpageState extends State<Firstpage> {
                             arguments: index);
                       },
                       child: Card(
-                        child: Column(
+                          child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.all(9.0),
+                          child: Container(
+                            child: Image.network(
+                              fruit[index]['image'],
+                              height: 200,
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Text(fruit[index]['name']),
+                            Text('${fruit[index]['location']} '),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(9.0),
-                              child: Container(
-                                child: Image.network(
-                                  fruit[index]['image'],
-                                  height: 200,
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Text(fruit[index]['name']),
-                                Text('${fruit[index]['location']} '),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.alarm,
-                                        size: 20,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(fruit[index]['left']),
-                                    ],
-                                  ),
-                                  
-                                
-                              ),
-                              Column(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.alarm,
-                                          size: 20,
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text('00:59:34'),
-                                      ],
-                                    ),
+                                  Icon(
+                                    Icons.alarm,
+                                    size: 20,
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 20),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                              'assets/images/auction.png',
-                                              width: 20,
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text('5000 บาท'),
-                                          ],
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 20),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.people),
-                                            Text('10 คน')
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  SizedBox(width: 5),
+                                  Text(fruit[index]['left']),
                                 ],
-                              )
-                            ],
-                          ),]
-                        )
-                      ),
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/auction.png',
+                                            width: 20,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(fruit[index]['price'].toString()),
+                                        ],
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 20),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.people),
+                                          Text('10 คน')
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ])),
                     ),
                   );
                 },
