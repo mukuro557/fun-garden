@@ -12,12 +12,29 @@ class _FirstpageState extends State<Firstpage> {
   final List fruit = [
     {
       'name': 'สวนเงาะลุงจ่า',
-      'id':'1',
+      'id': '1',
       'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
-      'image': 'rambutan.jpg'
+      'image': 'rambutan.jpg',
+      'price': '5000',
+      'date_end': '6/12/2020',
+      'left': '00:00:00',
     },
   ];
   String _url = 'http://10.0.2.2:35000/';
+  DateTime todaay = DateTime.now();
+
+  _reduce() {
+    Timer.periodic(Duration(minutes: 1), (timer) {
+      for (int i = 0; i < fruit.length - 1; i++) {
+        DateTime end = DateTime.parse(fruit[i]['date_end']);
+        int total = todaay.difference(end).inMilliseconds * -1;
+        int minutefi = (total ~/ 6000) % 60;
+        int hourfi = (total ~/ 360000) % 60;
+        print('00:$hourfi:$minutefi');
+        fruit[i]['left'] = '00:$hourfi:$minutefi';
+      }
+    });
+  }
 
   _getallfriut() async {
     try {
@@ -29,24 +46,30 @@ class _FirstpageState extends State<Firstpage> {
       var res = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        double county = res[0].length / 8;
-        int count = county.toInt();
+        int count = res.length;
 
         for (int i = 0; i < count; i++) {
           String idsen = (res[i]['Sell_id']).toString();
-          print(idsen);
+
           try {
             http.Response responses = await http.post(_url + 'image',
                 body: {"id": idsen}).timeout(Duration(seconds: 5));
             var respon = responses.body;
-            
-            setState(() {
-              var reson = jsonDecode(respon);
 
-              fruit[i]['name'] = res[i]['Farm_name'];
-              fruit[i]['location'] = res[i]['Address'];
-              fruit[i]['image'] = reson[i]['Image'];
-              fruit[i]['id'] = res[i]['id'];
+            var reson = jsonDecode(respon);
+            var date = res[0]['Date_end'];
+            DateTime end = DateTime.parse(date);
+            todaay.difference(end).inHours;
+            int total = todaay.difference(end).inMilliseconds * -1;
+            int minutefi = (total ~/ 6000) % 60;
+            int hourfi = (total ~/ 360000) % 60;
+            setState(() {
+              fruit[i]['name'] = res[0]['Farm_name'];
+              fruit[i]['location'] = res[0]['Address'];
+              fruit[i]['image'] = reson[0]['Image'];
+              fruit[i]['date_end'] = res[0]['Date_end'];
+              fruit[i]['id'] = res[0]['id'];
+              fruit[i]['left'] = '00:$hourfi:$minutefi';
               fruit.add({});
             });
           } on TimeoutException catch (e) {
@@ -82,6 +105,7 @@ class _FirstpageState extends State<Firstpage> {
     // TODO: implement initState
     super.initState();
     _getallfriut();
+    _reduce();
   }
 
   @override
@@ -183,13 +207,14 @@ class _FirstpageState extends State<Firstpage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: fruit.length-1,
+                itemCount: fruit.length - 1,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/auction");
+                        Navigator.pushNamed(context, "/auction",
+                            arguments: index);
                       },
                       child: Card(
                         child: Column(
@@ -198,7 +223,7 @@ class _FirstpageState extends State<Firstpage> {
                               padding: const EdgeInsets.all(9.0),
                               child: Container(
                                 child: Image.network(
-                                   fruit[index]['image'],
+                                  fruit[index]['image'],
                                   height: 200,
                                 ),
                               ),
@@ -221,7 +246,7 @@ class _FirstpageState extends State<Firstpage> {
                                         size: 20,
                                       ),
                                       SizedBox(width: 5),
-                                      Text('00:59:34'),
+                                      Text(fruit[index]['left']),
                                     ],
                                   ),
                                 ),

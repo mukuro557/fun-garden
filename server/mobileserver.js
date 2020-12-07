@@ -124,7 +124,7 @@ app.post("/fruit_info", function (req, res) {
 });
 
 app.get("/allfruit", function (req, res) {
-    let sql = "SELECT sell.Sell_id,sell.Fruit, farm.* FROM farm RIGHT JOIN sell ON farm.Farm_id = sell.Farm_id";
+    let sql = "SELECT sell.Sell_id,sell.Fruit,sell.Date_end, farm.* FROM farm RIGHT JOIN sell ON farm.Farm_id = sell.Farm_id";
     con.query(sql, function (err, result, fields) {
 
         if (err) {
