@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Firstpage extends StatefulWidget {
   @override
   _FirstpageState createState() => _FirstpageState();
@@ -26,6 +28,11 @@ class _FirstpageState extends State<Firstpage> {
 
   int top;
 
+  _keepdata(String id) async {
+    SharedPreferences fruitid = await SharedPreferences.getInstance();
+    fruitid.setString('id', id);
+  }
+
   _reduce() {
     for (int i = 0; i < fruit.length - 1; i++) {
       if (top == null || top < fruit[i]['time']) {
@@ -45,9 +52,8 @@ class _FirstpageState extends State<Firstpage> {
           int minutefi = total % 60;
           int hourfi = total ~/ 60;
           fruit[i]['left'] = '00:$hourfi:$minutefi';
+          
         });
-
-        print(top);
       }
       if (top <= 0) {
         return timer.cancel();
@@ -88,7 +94,7 @@ class _FirstpageState extends State<Firstpage> {
               fruit[i]['image'] = reson[0]['Image'];
               fruit[i]['date_end'] = res[0]['Date_end'];
               fruit[i]['price'] = res[0]['Price'];
-              fruit[i]['id'] = res[0]['id'];
+              fruit[i]['id'] = res[0]['Sell_id'];
               fruit[i]['left'] = '00:$hourfi:$minutefi';
               fruit[i]['time'] = total;
 
@@ -326,8 +332,8 @@ class _FirstpageState extends State<Firstpage> {
                         const EdgeInsets.only(left: 35, right: 35, top: 15),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/auction",
-                            arguments: index);
+                        Navigator.pushNamed(context, "/auction");
+                        _keepdata(fruit[index]['id'].toString());
                       },
                       child: Card(
                           child: Column(children: [
@@ -378,7 +384,8 @@ class _FirstpageState extends State<Firstpage> {
                                             width: 20,
                                           ),
                                           SizedBox(width: 5),
-                                          Text(fruit[index]['price'].toString()),
+                                          Text(
+                                              fruit[index]['price'].toString()),
                                         ],
                                       ),
                                     ),

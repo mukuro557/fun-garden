@@ -137,7 +137,7 @@ app.get("/allfruit", function (req, res) {
             res.status(500).send("no information");
         }
         else {
-            console.log(result)
+            
             res.json(result);
 
 
@@ -145,10 +145,11 @@ app.get("/allfruit", function (req, res) {
     })
 });
 
-app.post("/allfarminfo", function (req, res) {
+app.post("/allfarminfoauc", function (req, res) {
     const id = req.body.id;
-    let sql = "SELECT * FROM image WHERE Sell_id = ? ";
-    con.query(sql, [id], function (err, result, fields) {
+
+    let sql = "SELECT farm.Farm_name,farm.Address,farm.Tel1,sell.*,farm.Descript FROM farm RIGHT JOIN sell ON farm.Farm_id = sell.Farm_id WHERE sell.Sell_id =?";
+    con.query(sql,[id], function (err, result, fields) {
 
         if (err) {
             console.error(err.message);
