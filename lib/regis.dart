@@ -78,7 +78,6 @@ class Regis extends StatelessWidget {
                                               BorderSide(color: Colors.grey)),
                                     ),
                                   )),
-                                  
                             ],
                           ),
                         ),
@@ -104,7 +103,6 @@ class Regis extends StatelessWidget {
                                               BorderSide(color: Colors.grey)),
                                     ),
                                   )),
-                                  
                             ],
                           ),
                         ),
@@ -130,17 +128,16 @@ class Regis extends StatelessWidget {
                                               BorderSide(color: Colors.grey)),
                                     ),
                                   )),
-                                  
                             ],
                           ),
                         ),
-                        
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top:20,left: 40),
+                              padding: const EdgeInsets.only(top: 20),
                               child: ButtonTheme(
-                                minWidth: 130.0,
+                                minWidth: 300.0,
                                 height: 50,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
@@ -159,10 +156,10 @@ class Regis extends StatelessWidget {
                                 ),
                               ),
                             ),
-                             Padding(
-                               padding: const EdgeInsets.only(top: 20,left: 10),
-                               child: ButtonTheme(
-                                minWidth: 130.0,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: ButtonTheme(
+                                minWidth: 300.0,
                                 height: 50,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
@@ -170,20 +167,22 @@ class Regis extends StatelessWidget {
                                 child: RaisedButton(
                                   elevation: 2.0,
                                   hoverColor: Colors.green,
-                                  color: Colors.red[300],
+                                  color: Colors.white,
                                   child: Text(
                                     "ยกเลิก",
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: Color.fromRGBO(34, 87, 122, 10),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, '/login', (route) => false);
+                                  },
                                 ),
+                              ),
                             ),
-                             ),
                           ],
                         ),
-                        
                       ],
                     ),
                   ),
