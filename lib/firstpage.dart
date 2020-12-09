@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:fungarden/notifications.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -191,6 +192,13 @@ class _FirstpageState extends State<Firstpage> {
                                 color: Colors.white,
                                 size: 40,
                               ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Notifications()),
+                                );
+                              },
                             ),
                           ],
                         ),

@@ -1,12 +1,54 @@
 import 'package:flutter/material.dart';
 
-class Regis extends StatelessWidget {
+class Regis extends StatefulWidget {
+  @override
+  _RegisState createState() => _RegisState();
+}
+
+class _RegisState extends State<Regis> {
   TextEditingController _username = TextEditingController();
+
   TextEditingController _password = TextEditingController();
+
   TextEditingController _phone = TextEditingController();
-  
-  _register() {
-    
+
+  _register() {}
+
+  Future showAlert() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/corrnect.png',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'สำเร็จ',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Text('เข้าสู่หน้าต่อไป'),
+            ],
+          ),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (route) => false);
+                });
+              },
+              child: Text('ต่อไป'),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -164,7 +206,9 @@ class Regis extends StatelessWidget {
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showAlert();
+                                  },
                                 ),
                               ),
                             ),
