@@ -189,6 +189,31 @@ app.post("/image", function (req, res) {
     })
 });
 
+app.post("/auctionsstart", function (req, res) {
+    const id_user = req.body.id_user;
+    const id_sell = req.body.id_sell;
+    const price = req.body.price;
+    const id = req.body.id;
+
+    let sql = "INSERT INTO auction(Auctioneer,Sell_id,price) VALUES (?,?,?)";
+    con.query(sql, [id_user,id_sell,price], function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(503).send("เซิร์ฟเวอร์ไม่ตอบสนอง");
+            return;
+        }
+        // get inserted rows
+        const numrows = result.affectedRows;
+        if (numrows != 1) {
+            console.error("Error");
+            res.status(500).send("ไม่สามารถเพิ่มข้อมูลได้");
+        }
+        else {
+            res.send("เพิ่มข้อมูลเรียบร้อย");
+        }
+    })
+});
+
 const port = process.env.PORT || 35000;
 app.listen(port, function () {
     console.log("Server is ready at " + port);

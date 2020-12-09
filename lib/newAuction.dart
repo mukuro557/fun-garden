@@ -29,7 +29,7 @@ class _NewAuctionState extends State<NewAuction> {
   ];
   int top;
 
-   _reduce() {
+  _reduce() {
     for (int i = 0; i < fruit.length - 1; i++) {
       if (top == null || top < fruit[i]['time']) {
         setState(() {
@@ -48,7 +48,6 @@ class _NewAuctionState extends State<NewAuction> {
           int minutefi = total % 60;
           int hourfi = total ~/ 60;
           fruit[i]['left'] = '00:$hourfi:$minutefi';
-          
         });
       }
       if (top <= 0) {
@@ -92,16 +91,51 @@ class _NewAuctionState extends State<NewAuction> {
           fruit[0]['date_end'] = reson[0]['Date_end'];
           fruit[0]['left'] = '00:$hourfi:$minutefi';
           fruit[0]['time'] = total;
-          
+
           fruit.add({});
         });
-         _reduce();
+        _reduce();
       }
     } on TimeoutException catch (e) {
       print('Timeout: $e');
     } catch (e) {
       print('Error: $e');
     }
+  }
+
+  _auction() async {
+    SharedPreferences iduser = await SharedPreferences.getInstance();
+
+    try {
+      http.Response responses = await http.post(_url + 'auctionsstart', body: {
+        "id_user": iduser.getInt('id'),
+        "id_sell": fruit[0]['id'],
+        "price": '500'
+      }).timeout(Duration(seconds: 5));
+      var respon = responses.body;
+      print(respon);
+      if (responses.statusCode == 200) {
+        var reson = jsonDecode(respon);
+      }
+      _reduce();
+    } on TimeoutException catch (e) {
+      print('Timeout: $e');
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  _showAlert() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Result'),
+          content: Text("gg"),
+          actions: [],
+        );
+      },
+    );
   }
 
   @override
@@ -365,8 +399,7 @@ class _NewAuctionState extends State<NewAuction> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: 250,
-                          child: Text(
-                              fruit[0]['descript']),
+                          child: Text(fruit[0]['descript']),
                         ),
                       )
                     ],
@@ -377,47 +410,40 @@ class _NewAuctionState extends State<NewAuction> {
           ],
         ),
       ),
-      bottomNavigationBar: FloatingBtn(),
-    );
-  }
-}
-
-class FloatingBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Container(
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+              width: 240,
+              height: 50,
+              child: RaisedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.add),
+                label: Text('ติดตาม'),
+                color: Colors.white,
+                elevation: 10,
+              )),
+          Container(
             width: 240,
             height: 50,
             child: RaisedButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text('ติดตาม'),
-              color: Colors.white,
-              elevation: 10,
-            )),
-        Container(
-          width: 240,
-          height: 50,
-          child: RaisedButton.icon(
-            color: Color.fromRGBO(56, 163, 165, 10),
-            icon: Image.asset(
-              'assets/images/auction.png',
-              width: 20,
-            ),
-            onPressed: () {},
-            label: Text(
-              'ประมูล',
-              style: TextStyle(color: Colors.white),
+              color: Color.fromRGBO(56, 163, 165, 10),
+              icon: Image.asset(
+                'assets/images/auction.png',
+                width: 20,
+              ),
+              onPressed: () => _showAlert(),
+              label: Text(
+                'ประมูล',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
