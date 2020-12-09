@@ -5,12 +5,15 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'dart:ui';
+
 class Firstpage extends StatefulWidget {
   @override
   _FirstpageState createState() => _FirstpageState();
 }
 
 class _FirstpageState extends State<Firstpage> {
+  String name = '';
   final List fruit = [
     {
       'name': 'สวนเงาะลุงจ่า',
@@ -52,7 +55,6 @@ class _FirstpageState extends State<Firstpage> {
           int minutefi = total % 60;
           int hourfi = total ~/ 60;
           fruit[i]['left'] = '00:$hourfi:$minutefi';
-          
         });
       }
       if (top <= 0) {
@@ -129,11 +131,22 @@ class _FirstpageState extends State<Firstpage> {
     );
   }
 
+  _userinfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences pic = await SharedPreferences.getInstance();
+    if (prefs.getString('name') != null) {
+      setState(() {
+        name = prefs.getString('name');
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _getallfriut();
+    _userinfo();
   }
 
   @override
@@ -180,7 +193,7 @@ class _FirstpageState extends State<Firstpage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 280),
                         child: Text(
-                          'กล้ามาก เก่งมาก',
+                          name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
