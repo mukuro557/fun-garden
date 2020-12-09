@@ -71,6 +71,7 @@ class _NewmainPageState extends State<NewmainPage> {
     super.initState();
 
     _userinfo();
+    
   }
 
   @override
@@ -78,9 +79,6 @@ class _NewmainPageState extends State<NewmainPage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Color.fromRGBO(56, 163, 165, 10),
-        // ),
         bottomNavigationBar: Container(
           color: Colors.white,
           height: 80,

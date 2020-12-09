@@ -17,3 +17,10 @@ Content-Type: application/json
     "username":"benz",
     "password":"1234"
 }
+##############
+POST http://localhost:35000/allfarminfoauc
+Content-Type: application/json
+
+{
+    "id":"0"
+}

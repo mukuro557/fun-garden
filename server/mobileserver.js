@@ -124,8 +124,32 @@ app.post("/fruit_info", function (req, res) {
 });
 
 app.get("/allfruit", function (req, res) {
-    let sql = "SELECT * FROM sell ";
+    let sql = "SELECT sell.Sell_id,sell.Fruit,sell.Date_end,sell.Price, farm.* FROM farm RIGHT JOIN sell ON farm.Farm_id = sell.Farm_id";
     con.query(sql, function (err, result, fields) {
+
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Database server error");
+            return;
+        }
+        const numrows = result.affectedRows;
+        if (numrows < 1) {
+            res.status(500).send("no information");
+        }
+        else {
+            
+            res.json(result);
+
+
+        }
+    })
+});
+
+app.post("/allfarminfoauc", function (req, res) {
+    const id = req.body.id;
+
+    let sql = "SELECT farm.Farm_name,farm.Address,farm.Tel1,sell.*,farm.Descript FROM farm RIGHT JOIN sell ON farm.Farm_id = sell.Farm_id WHERE sell.Sell_id =?";
+    con.query(sql,[id], function (err, result, fields) {
 
         if (err) {
             console.error(err.message);
@@ -143,10 +167,11 @@ app.get("/allfruit", function (req, res) {
     })
 });
 
-app.post("/allfarminfo", function (req, res) {
+app.post("/image", function (req, res) {
     const id = req.body.id;
-    let sql = "SELECT * FROM farm WHERE Farm_id = ? ";
-    con.query(sql,[id], function (err, result, fields) {
+    console.log(id);
+    let sql = "SELECT * FROM image WHERE Sell_id = ? ";
+    con.query(sql, [id], function (err, result, fields) {
 
         if (err) {
             console.error(err.message);
@@ -159,7 +184,7 @@ app.post("/allfarminfo", function (req, res) {
         }
         else {
             res.json(result);
-            console.log(result);
+            console.log(result[0].image);
         }
     })
 });

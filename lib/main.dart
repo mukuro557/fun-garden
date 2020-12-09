@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:fungarden/adddelete_farm.dart';
-import 'package:fungarden/firstpage.dart';
-import 'package:fungarden/auction.dart';
 import 'package:fungarden/auctionpro.dart';
-import 'package:fungarden/landingpage.dart';
 import 'package:fungarden/login.dart';
 import 'package:fungarden/newAuction.dart';
 import 'package:fungarden/newmain.dart';
@@ -13,10 +9,7 @@ import 'package:flutter/material.dart';
 
 
 void main() 
-// {
-  // runApp(MaterialApp(
-  //   home: Firstpage(),
-  // ));
+
 async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
