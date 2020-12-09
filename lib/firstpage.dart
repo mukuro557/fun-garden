@@ -14,6 +14,7 @@ class Firstpage extends StatefulWidget {
 
 class _FirstpageState extends State<Firstpage> {
   String name = '';
+  String topic = 'ล่าสุด';
   final List fruit = [
     {
       'name': 'สวนเงาะลุงจ่า',
@@ -141,6 +142,10 @@ class _FirstpageState extends State<Firstpage> {
     }
   }
 
+  // void chagetext() {
+  //   topic = 'มาแรง';
+  // }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -211,7 +216,12 @@ class _FirstpageState extends State<Firstpage> {
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                topic = 'มาแรง';
+                              });
+                              ;
+                            },
                             color: Color.fromRGBO(254, 74, 73, 10),
                             textColor: Colors.white,
                             child: Icon(
@@ -239,7 +249,11 @@ class _FirstpageState extends State<Firstpage> {
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                topic = 'ใกล้สุด';
+                              });
+                            },
                             color: Color.fromRGBO(248, 225, 108, 10),
                             textColor: Colors.white,
                             child: Icon(
@@ -267,7 +281,11 @@ class _FirstpageState extends State<Firstpage> {
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                topic = 'ราคาดี';
+                              });
+                            },
                             color: Color.fromRGBO(251, 143, 103, 10),
                             textColor: Colors.white,
                             child: Icon(
@@ -295,7 +313,11 @@ class _FirstpageState extends State<Firstpage> {
                       Column(
                         children: [
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                topic = 'พรีเมี่ยม';
+                              });
+                            },
                             color: Color.fromRGBO(42, 183, 202, 10),
                             textColor: Colors.white,
                             child: Icon(
@@ -330,7 +352,7 @@ class _FirstpageState extends State<Firstpage> {
               child: Row(
                 children: [
                   Text(
-                    'ล่าสุด',
+                    topic,
                     style: TextStyle(fontSize: 28),
                   )
                 ],
@@ -341,8 +363,7 @@ class _FirstpageState extends State<Firstpage> {
                 itemCount: fruit.length - 1,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(left: 35, right: 35),
+                    padding: const EdgeInsets.only(left: 35, right: 35),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, "/auction");
@@ -374,7 +395,7 @@ class _FirstpageState extends State<Firstpage> {
                         ),
                         SizedBox(height: 30),
                         Padding(
-                          padding: const EdgeInsets.only(left: 25,bottom: 25),
+                          padding: const EdgeInsets.only(left: 25, bottom: 25),
                           child: Column(
                             children: [
                               Row(
