@@ -342,7 +342,7 @@ class _FirstpageState extends State<Firstpage> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:
-                        const EdgeInsets.only(left: 35, right: 35, top: 15),
+                        const EdgeInsets.only(left: 35, right: 35),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, "/auction");
@@ -351,7 +351,7 @@ class _FirstpageState extends State<Firstpage> {
                       child: Card(
                           child: Column(children: [
                         Padding(
-                          padding: const EdgeInsets.all(9.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Container(
                             child: Image.network(
                               fruit[index]['image'],
@@ -361,16 +361,23 @@ class _FirstpageState extends State<Firstpage> {
                         ),
                         Column(
                           children: [
-                            Text(fruit[index]['name']),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 230),
+                              child: Text(
+                                fruit[index]['name'],
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                             Text('${fruit[index]['location']} '),
                           ],
                         ),
-                        SizedBox(height: 5),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
+                        SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 25,bottom: 25),
+                          child: Column(
+                            children: [
+                              Row(
                                 children: [
                                   Icon(
                                     Icons.alarm,
@@ -380,17 +387,14 @@ class _FirstpageState extends State<Firstpage> {
                                   Text(fruit[index]['left']),
                                 ],
                               ),
-                            ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Row(
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Row(
                                         children: [
                                           Image.asset(
                                             'assets/images/auction.png',
@@ -398,25 +402,32 @@ class _FirstpageState extends State<Firstpage> {
                                           ),
                                           SizedBox(width: 5),
                                           Text(
-                                              fruit[index]['price'].toString()),
+                                            fruit[index]['price'].toString() +
+                                                ' บาท',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  0, 196, 154, 10),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 20),
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.people),
-                                          Text('10 คน')
-                                        ],
+                                      Spacer(),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 20),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.people),
+                                            Text('10 คน')
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ])),
                     ),
