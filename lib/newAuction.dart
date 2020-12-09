@@ -6,13 +6,11 @@ class NewAuction extends StatefulWidget {
 }
 
 class _NewAuctionState extends State<NewAuction> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(56, 163, 165, 10),
+        backgroundColor: Color.fromRGBO(0, 196, 154, 10),
         title: Text('สวนองุ่นน้าแวว'),
       ),
       body: SingleChildScrollView(
@@ -27,28 +25,41 @@ class _NewAuctionState extends State<NewAuction> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 20, top: 15),
               child: Row(
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        'สวนองุ่นน้าแวว',
-                        style: TextStyle(fontSize: 26),
-                      ),
-                      Text(
-                        'ราคาเริ่มต้น 5,000 บาท',
-                        style: TextStyle(
-                            color: Color.fromRGBO(56, 163, 165, 10),
-                            fontSize: 16),
-                      )
-                    ],
+                  Text(
+                    'สวนองุ่นน้าแวว',
+                    style: TextStyle(fontSize: 26),
+                  ),
+                  SizedBox(
+                    width: 150,
+                  ),
+                  //สถานะ
+                  Text(
+                    'กำลังประมูล',
+                    style: TextStyle(
+                        fontSize: 15, color: Color.fromRGBO(56, 163, 165, 10)),
+                  ),
+                ],
+              ),
+            ),
+            //ราคา
+            Padding(
+              padding: const EdgeInsets.only(right: 260, top: 10),
+              child: Column(
+                children: [
+                  Text(
+                    'ราคาเริ่มต้น 5,000 บาท',
+                    style: TextStyle(
+                        color: Color.fromRGBO(56, 163, 165, 10), fontSize: 16),
                   )
                 ],
               ),
             ),
+            //จำนวนคนประมูล
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 20, top: 15),
               child: Row(
                 children: [
                   Icon(
@@ -69,148 +80,131 @@ class _NewAuctionState extends State<NewAuction> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-              child: Row(
-                children: [
-                  Text(
-                    'ประเภท',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(width: 5),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      'องุ่น',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 20, top: 25),
               child: Row(
                 children: [
                   Text(
                     'อันดับผู้ประมูล',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
             ),
-            Row(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  decoration: BoxDecoration(
-                      color: Colors.yellow[300],
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Text(
-                    '1',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Text('มะม่วง โหฮิ้ว'),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('100,000'),
-              )
-            ]),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text(
-                      '2',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Text('แตงโม ลาล่า'),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('90,000'),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    decoration: BoxDecoration(
-                        color: Colors.deepOrangeAccent[200],
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text(
-                      '3',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Text('แป้ง'),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('50,000'),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, top: 2),
-              child: Row(
+            //อันดับผู้ประมูล
+            Container(
+              width: 400,
+              height: 200,
+              child: ListView(
                 children: [
-                  Text('4'),
-                  SizedBox(width: 15),
-                  Text('ลีลี่'),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('20,000'),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, right: 20),
+                        child: Row(children: [
+                          Icon(
+                            Icons.stars,
+                            color: Colors.yellow[700],
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('1'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('มะม่วง โหฮิ้ว'),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('100,000'),
+                          )
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 20),
+                        child: Row(
+                          children: [
+                            Text('2'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text('แตงโม ลาล่า'),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('90,000'),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 20),
+                        child: Row(
+                          children: [
+                            Text('3'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text('แป้ง'),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('50,000'),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 30, top: 2, right: 20),
+                        child: Row(
+                          children: [
+                            Text('4'),
+                            SizedBox(width: 10),
+                            Text('ลีลี่'),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('20,000'),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 30, top: 2, right: 20),
+                        child: Row(
+                          children: [
+                            Text('5'),
+                            SizedBox(width: 10),
+                            Text('lalalili'),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('13,000'),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15, top: 2),
-              child: Row(
-                children: [
-                  Text('5'),
-                  SizedBox(width: 15),
-                  Text('lalalili'),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('13,000'),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
                   Text(
                     'รายละเอียด',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
             ),
+            //ที่อยู่
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 30, top: 10),
               child: Row(
                 children: [
                   Text(
@@ -221,8 +215,9 @@ class _NewAuctionState extends State<NewAuction> {
                 ],
               ),
             ),
+            //เบอร์โทร
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 30, top: 10),
               child: Row(
                 children: [
                   Text(
@@ -234,28 +229,29 @@ class _NewAuctionState extends State<NewAuction> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+              padding: const EdgeInsets.only(right: 355, top: 10),
+              child: Text(
+                'เกี่ยวกับ:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            //เกี่ยวกับ
+            Padding(
+              padding: const EdgeInsets.only(left: 30, top: 10),
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        'เกี่ยวกับ:',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 250,
-                          child: Text(
-                              '“ไร่องุ่นน้าแวว” อ.มวกเหล็ก จ.สระบุรี มีพื้นที่ขนาด 60 ไร่ บรรยากาศร่มรื่นกลางหุบเขา แม้จะเป็นไร่ที่ไม่ใหญ่นัก แต่นักท่องเที่ยวสามารถสัมผัสบรรยากาศภายในไร่ได้อย่างใกล้ชิด ได้เห็นหารทำงานของชาวไร่ การดูแล เพาะพันธุ์ และการเก็บเกี่ยวองุ่นพันธุ์ดีกว่าหมื่นต้น ผลองุ่นที่นี่รสชาติหวานกรอบ อร่อยชุ่มลิ้น นอกจากนี้ยังปลอดสารพิษอีกด้วย ผลิตภัณฑ์ที่ไม่ซ้ำใครของที่นี่คือ ท็อฟฟี่องุ่นแท้ ซึ่งเป็นที่นิยมมาก รวมถึงน้ำองุ่นที่รสชาติอร่อย เหมาะกับการซื้อเป็นของฝากยิ่ง'),
-                        ),
-                      )
-                    ],
+                  Container(
+                    width: 420,
+                    child: Column(
+                      children: [
+                        Text(
+                            'ไร่องุ่นน้าแวว อ.มวกเหล็ก จ.สระบุรี มีพื้นที่ขนาด 60 ไร่ บรรยากาศร่มรื่นกลางหุบเขา แม้จะเป็นไร่ที่ไม่ใหญ่นัก แต่นักท่องเที่ยวสามารถสัมผัสบรรยากาศภายในไร่ได้อย่างใกล้ชิด ได้เห็นหารทำงานของชาวไร่ การดูแล เพาะพันธุ์ และการเก็บเกี่ยวองุ่นพันธุ์ดีกว่าหมื่นต้น ผลองุ่นที่นี่รสชาติหวานกรอบ อร่อยชุ่มลิ้น นอกจากนี้ยังปลอดสารพิษอีกด้วย ผลิตภัณฑ์ที่ไม่ซ้ำใครของที่นี่คือ ท็อฟฟี่องุ่นแท้ ซึ่งเป็นที่นิยมมาก รวมถึงน้ำองุ่นที่รสชาติอร่อย เหมาะกับการซื้อเป็นของฝากยิ่ง'),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -267,7 +263,6 @@ class _NewAuctionState extends State<NewAuction> {
 class FloatingBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-  
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -275,21 +270,27 @@ class FloatingBtn extends StatelessWidget {
           height: 20,
         ),
         Container(
-            width: 180,
+            width: 240,
             height: 50,
             child: RaisedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.add),
               label: Text('ติดตาม'),
               color: Colors.white,
+              elevation: 10,
             )),
         Container(
-          width: 180,
+          width: 240,
           height: 50,
           child: RaisedButton.icon(
             color: Color.fromRGBO(56, 163, 165, 10),
-            icon: Image.asset('assets/images/auction.png',width: 20,),
-            onPressed: (){},
+            icon: Image.asset(
+              'assets/images/auction.png',
+              width: 20,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+            elevation: 10,
             label: Text(
               'ประมูล',
               style: TextStyle(color: Colors.white),
