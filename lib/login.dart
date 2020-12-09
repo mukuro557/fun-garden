@@ -47,7 +47,7 @@ class _LoginState extends State<Login> {
         iduser.setInt("id", res['User_id']);
         print(res);
 
-         Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushNamedAndRemoveUntil(
             context, '/newmain', (route) => false);
       } else {
         showAlert(response.body.toString());
@@ -160,107 +160,163 @@ class _LoginState extends State<Login> {
                             ],
                           ),
                         ),
-                        ButtonTheme(
-                          minWidth: 300.0,
-                          height: 50,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(44, 20, 44, 5),
-                            child: RaisedButton(
-                              elevation: 2.0,
-                              hoverColor: Colors.green,
-                              color: Color.fromRGBO(56, 163, 165, 10),
-                              child: Text(
-                                "ลงชื่อเข้าใช้",
-                                style: TextStyle(
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ButtonTheme(
+                                minWidth: 400.0,
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(44, 20, 44, 5),
+                                  child: RaisedButton(
+                                    elevation: 2.0,
+                                    hoverColor: Colors.green,
+                                    color: Color.fromRGBO(56, 163, 165, 10),
+                                    child: Text(
+                                      "ลงชื่อเข้าใช้",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    onPressed: () {
+                                      _normallogin();
+                                    },
+                                  ),
+                                ),
+                              ),
+                              ButtonTheme(
+                                minWidth: 300.0,
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(44, 10, 44, 5),
+                                  child: RaisedButton(
+                                    elevation: 2.0,
+                                    hoverColor: Colors.white,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {
-                                _normallogin();
-                              },
-                            ),
-                          ),
-                        ),
-                        ButtonTheme(
-                          minWidth: 300.0,
-                          height: 50,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(44, 10, 44, 5),
-                            child: RaisedButton(
-                              elevation: 2.0,
-                              hoverColor: Colors.white,
-                              color: Colors.white,
-                              child: Row(
-                                children: [
-                                  Image(
-                                      image: AssetImage(
-                                          'assets/images/google.png')),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      "Sign in with Google".toUpperCase(),
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(34, 87, 122, 10),
-                                          fontWeight: FontWeight.bold),
+                                    child: Row(
+                                      children: [
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/images/google.png')),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            "Sign in with Google".toUpperCase(),
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    34, 87, 122, 10),
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    onPressed: () {
+                                      signInWithGoogle().then(
+                                        (result) {
+                                          if (result != null) {
+                                            Navigator.pushNamedAndRemoveUntil(
+                                                context,
+                                                '/newmain',
+                                                (route) => false);
+                                          }
+                                        },
+                                      );
+                                    },
                                   ),
-                                ],
+                                ),
                               ),
-                              onPressed: () {
-                                signInWithGoogle().then(
-                                  (result) {
-                                    if (result != null) {
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          '/newmain', (route) => false);
-                                    }
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        ButtonTheme(
-                          minWidth: 300.0,
-                          height: 50,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(44, 5, 44, 5),
-                            child: RaisedButton(
-                              elevation: 2.0,
-                              hoverColor: Colors.grey,
-                              color: Colors.white,
-                              child: Row(
-                                children: [
-                                  Image(
-                                      image: AssetImage(
-                                          'assets/images/facebook.png')),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      "Sign in with facebook".toUpperCase(),
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(34, 87, 122, 10),
-                                          fontWeight: FontWeight.bold),
+                              ButtonTheme(
+                                minWidth: 300.0,
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(44, 5, 44, 5),
+                                  child: RaisedButton(
+                                    elevation: 2.0,
+                                    hoverColor: Colors.grey,
+                                    color: Colors.white,
+                                    child: Row(
+                                      children: [
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/images/facebook.png')),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            "Sign in with facebook"
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    34, 87, 122, 10),
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    onPressed: () {},
                                   ),
-                                ],
+                                ),
                               ),
-                              onPressed: () {},
-                            ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text('หรือ'),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              ButtonTheme(
+                                minWidth: 300.0,
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(44, 5, 44, 5),
+                                  child: RaisedButton(
+                                    elevation: 2.0,
+                                    hoverColor: Colors.grey,
+                                    color: Colors.white,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Center(
+                                            child: Text(
+                                              "สมัครผู้ใช้งาน".toUpperCase(),
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      34, 87, 122, 10),
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context, '/regis', (route) => false);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
