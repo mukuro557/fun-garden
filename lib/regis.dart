@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Regis extends StatelessWidget {
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _phone = TextEditingController();
+  
+  _register() {
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +53,7 @@ class Regis extends StatelessWidget {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _username,
                                     decoration: InputDecoration(
                                       hintText: 'ชื่อผู้ใช้',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -70,6 +79,7 @@ class Regis extends StatelessWidget {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _password,
                                     decoration: InputDecoration(
                                       hintText: 'รหัสผ่าน',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -95,6 +105,7 @@ class Regis extends StatelessWidget {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _password,
                                     decoration: InputDecoration(
                                       hintText: 'ยืนยันรหัสผ่าน',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -120,6 +131,7 @@ class Regis extends StatelessWidget {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
+                                    controller: _phone,
                                     decoration: InputDecoration(
                                       hintText: 'เบอร์โทรศัพท์',
                                       hintStyle: TextStyle(color: Colors.black),
