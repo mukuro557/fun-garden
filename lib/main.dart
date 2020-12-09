@@ -6,6 +6,7 @@ import 'package:fungarden/newmain.dart';
 import 'package:fungarden/owner.dart';
 import 'package:fungarden/regis.dart';
 import 'package:fungarden/thefristpageapp.dart';
+import 'package:fungarden/notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,7 @@ async {
       '/newmain': (context) => NewmainPage(),
       '/login': (context) => Login(),
       '/regis': (context) => Regis(),
+      '/notifications': (context) => Notifications(),
     },
   ));
 }
