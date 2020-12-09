@@ -78,157 +78,182 @@ class _MyuserState extends State<Myuser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.grey[100],
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  child: Image.asset(
-                    'assets/images/bg.jpg',
-                  ),
+      backgroundColor: Colors.grey[200],
+      body: Column(
+        children: [
+          Container(
+            width: 500,
+            height: 100,
+            color: Color.fromRGBO(0, 196, 154, 10),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Center(
+                child: Text(
+                  'โปรไฟล์ของฉัน',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
-                Row(
+              ),
+            ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundImage: NetworkImage(picture),
-                        ),
+                    Container(
+                      width: 500,
+                      height: 170,
+                      child: Image.asset(
+                        'assets/images/bg.jpg',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
-                      name,
-                      style: TextStyle(color: Colors.white, fontSize: 22),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Column(
-                children: [
-                  Container(
-                    width: 360,
-                    height: 50,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70, left: 20),
                       child: Row(
                         children: [
-                          Icon(Icons.money_off),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text('ยอดเงินคงเหลือ'),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(picture),
+                              ),
+                            ),
                           ),
-                          Spacer(),
-                          Text('200,000')
+                          Text(
+                            name,
+                            style: TextStyle(color: Colors.white, fontSize: 22),
+                          )
                         ],
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 1),
-                    child: Container(
-                      width: 360,
-                      height: 50,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/add.png',
-                              width: 25,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('เติมเงิน'),
-                            ),
-                            Spacer(),
-                            Text('200,000')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 1),
-                    child: Container(
-                      width: 360,
-                      height: 50,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/auction.png',
-                              width: 25,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('ประมูลแล้ว'),
-                            ),
-                            Spacer(),
-                            Text('2 รายการ')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 1),
-                    child: Container(
-                      width: 360,
-                      height: 50,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/auction.png',
-                              width: 25,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('กำลังประมูล'),
-                            ),
-                            Spacer(),
-                            Text('0')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Container(
-                      width: 360,
-                      height: 50,
-                      child: RaisedButton(
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 500,
+                        height: 50,
                         color: Colors.white,
-                        onPressed: () {
-                          _logout();
-                        },
-                        child: Text(
-                          'ออกจากระบบ',
-                          style: TextStyle(color: Colors.red),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 25),
+                          child: Row(
+                            children: [
+                              Icon(Icons.money_off),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('ยอดเงินคงเหลือ'),
+                              Spacer(),
+                              Text('200,000 บาท')
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: Container(
+                          width: 500,
+                          height: 50,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/add.png',
+                                  width: 22,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('เติมเงิน'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: Container(
+                          width: 500,
+                          height: 50,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 25),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/auction.png',
+                                  width: 25,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('ประมูลแล้ว'),
+                                Spacer(),
+                                Text('2 รายการ')
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: Container(
+                          width: 500,
+                          height: 50,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 25),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/auction.png',
+                                  width: 25,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('กำลังประมูล'),
+                                Spacer(),
+                                Text('0')
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Container(
+                          width: 500,
+                          height: 50,
+                          child: RaisedButton(
+                            color: Colors.white,
+                            onPressed: () {
+                              _logout();
+                            },
+                            child: Text(
+                              'ออกจากระบบ',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
