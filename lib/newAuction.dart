@@ -34,6 +34,7 @@ class _NewAuctionState extends State<NewAuction> {
     }
   ];
   int top;
+  String dropdownValue = '5';
 
   _reduce() {
     for (int i = 0; i < fruit.length - 1; i++) {
@@ -167,19 +168,22 @@ class _NewAuctionState extends State<NewAuction> {
   }
 
   _auction() async {
-    SharedPreferences iduser = await SharedPreferences.getInstance();
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int price = int.parse(userinfo[0]['price']);
+    int plus = int.parse(dropdownValue);
+    int sum = price + plus;
+    print(sum);
     try {
       http.Response responses = await http.post(_url + 'auctionsstart', body: {
-        "id_user": iduser.getInt('id'),
-        "id_sell": fruit[0]['id'],
-        "price": '500'
+        "id_user": prefs.getString('name'),
+        "id_sell": "${fruit[0]['id']}",
+        "price": "$sum"
       }).timeout(Duration(seconds: 5));
       var respon = responses.body;
       if (responses.statusCode == 200) {
-        var reson = jsonDecode(respon);
+        Navigator.pop(context);
+        _getaucinfo();
       }
-      _reduce();
     } on TimeoutException catch (e) {
       print('Timeout: $e');
     } catch (e) {
@@ -192,9 +196,33 @@ class _NewAuctionState extends State<NewAuction> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Result'),
-          content: Text("gg"),
-          actions: [],
+          title: Text('กดเพิ่ม'),
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return DropdownButton(
+              value: dropdownValue,
+              items: <String>['5', '10', '20', '30', '40', '50']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String newValue) {
+                setState(() {
+                  dropdownValue = newValue;
+                });
+              },
+            );
+          }),
+          actions: [
+            RaisedButton(
+              onPressed: () {
+                _auction();
+              },
+              child: Text('ประมูล'),
+            )
+          ],
         );
       },
     );
@@ -307,7 +335,7 @@ class _NewAuctionState extends State<NewAuction> {
               width: 400,
               height: 200,
               child: ListView.builder(
-                itemCount: userinfo.length - 1,
+                itemCount: userinfo.length>=5? 5:userinfo.length-1 ,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
