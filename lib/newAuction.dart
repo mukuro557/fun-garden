@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,7 @@ class _NewAuctionState extends State<NewAuction> {
       'fruit': 'กล้วยน้ำว้า'
     }
   ];
+  var _image = [];
   int top;
   String dropdownValue = '5';
 
@@ -61,6 +63,26 @@ class _NewAuctionState extends State<NewAuction> {
         return timer.cancel();
       }
     });
+  }
+
+  _getimage() async {
+    SharedPreferences fruitid = await SharedPreferences.getInstance();
+    data = fruitid.getString('id');
+    try {
+      http.Response responses = await http.post(_url + 'image',
+          body: {"id": data}).timeout(Duration(seconds: 5));
+      var respon = responses.body;
+      if (responses.statusCode == 200) {
+        var reson = jsonDecode(respon);
+        for (int i = 0; i < reson.length; i++) {
+          _image.add(reson[i]['Image']);
+        }
+      }
+    } on TimeoutException catch (e) {
+      print('Timeout: $e');
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   _getaucinfo() async {
@@ -234,6 +256,7 @@ class _NewAuctionState extends State<NewAuction> {
     super.initState();
     _getaucinfo();
     _getalldata();
+    _getimage();
   }
 
   @override
@@ -247,11 +270,22 @@ class _NewAuctionState extends State<NewAuction> {
         child: Column(
           children: [
             Container(
-              child: Image.asset(
-                'assets/images/grape.jpg',
-                fit: BoxFit.cover,
-                width: 500,
-                height: 200,
+              child: CarouselSlider(
+                autoPlay: true,
+                autoPlayAnimationDuration: Duration(milliseconds: 500),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                height: MediaQuery.of(context).size.height / 2.5,
+                items: _image.map((card) {
+                  return Builder(builder: (BuildContext context) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height / 2.5,
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        child: Image.network(card, fit: BoxFit.cover),
+                      ),
+                    );
+                  });
+                }).toList(),
               ),
             ),
             Padding(
@@ -335,7 +369,7 @@ class _NewAuctionState extends State<NewAuction> {
               width: 400,
               height: 200,
               child: ListView.builder(
-                itemCount: userinfo.length>=5? 5:userinfo.length-1 ,
+                itemCount: userinfo.length >= 5 ? 5 : userinfo.length - 1,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
