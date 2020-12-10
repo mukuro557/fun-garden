@@ -18,9 +18,11 @@ Content-Type: application/json
     "password":"1234"
 }
 ##############
-POST http://localhost:35000/allfarminfoauc
+POST http://localhost:35000/auctionsstart
 Content-Type: application/json
 
 {
-    "id":"0"
+    "id_user": "Anuthep",
+        "id_sell": "0",
+        "price": 510
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,12 +18,13 @@ class _NewAuctionState extends State<NewAuction> {
     {
       'auctioneer': 'สวนเงาะลุงจ่า',
       'price': '50',
+      'date': '6/12/2020',
     }
   ];
   var fruit = [
     {
       'name': 'สวนเงาะลุงจ่า',
-      'id': '1',
+      'id': '0',
       'location': '54 ม.3 ต.รอบเวียง อ.เมือง จ.เชียงราย',
       'image': 'rambutan.jpg',
       'price': '5000',
@@ -34,9 +34,7 @@ class _NewAuctionState extends State<NewAuction> {
       'fruit': 'กล้วยน้ำว้า'
     }
   ];
-  var _image = [];
   int top;
-  String dropdownValue = '5';
 
   _reduce() {
     for (int i = 0; i < fruit.length - 1; i++) {
@@ -65,18 +63,37 @@ class _NewAuctionState extends State<NewAuction> {
     });
   }
 
-  _getimage() async {
-    SharedPreferences fruitid = await SharedPreferences.getInstance();
-    data = fruitid.getString('id');
+  _getuserinfo() async {
     try {
-      http.Response responses = await http.post(_url + 'image',
-          body: {"id": data}).timeout(Duration(seconds: 5));
+      http.Response responses = await http.post(_url + 'checkmostp', body: {
+        "id": data,
+      }).timeout(Duration(seconds: 5));
       var respon = responses.body;
+
       if (responses.statusCode == 200) {
         var reson = jsonDecode(respon);
-        for (int i = 0; i < reson.length; i++) {
-          _image.add(reson[i]['Image']);
-        }
+
+        // for (int i = 0; i < respon.length; i++) {
+        setState(() {
+          if (reson[0]['Auctioneer '] != null) {
+            userinfo[0]['auctioneer'] = reson[0]['Auctioneer '];
+          } else {
+            userinfo[0]['auctioneer'] = '';
+          }
+          if (reson[0]['price'] != null) {
+            userinfo[0]['price'] = "${reson[0]['price']}";
+          } else {
+            userinfo[0]['price'] = '';
+          }
+          if (reson[0]['Auction_date'] != null) {
+            userinfo[0]['date'] = "${reson[0]['Auction_date']}";
+          } else {
+            userinfo[0]['date'] = '';
+          }
+          userinfo.add({});
+        });
+        //     }
+
       }
     } on TimeoutException catch (e) {
       print('Timeout: $e');
@@ -85,48 +102,21 @@ class _NewAuctionState extends State<NewAuction> {
     }
   }
 
-  _getaucinfo() async {
+  _getid() async {
     SharedPreferences fruitid = await SharedPreferences.getInstance();
-    data = fruitid.getString('id');
-    try {
-      http.Response responses = await http.post(_url + 'checkmostp',
-          body: {"id": data}).timeout(Duration(seconds: 5));
-      var respon = responses.body;
-
-      if (responses.statusCode == 200) {
-        var reson = jsonDecode(respon);
-        for (int i = 0; i < reson.length; i++) {
-          setState(() {
-            if (reson[i]['Auctioneer'] != null) {
-              userinfo[i]['auctioneer'] = reson[i]['Auctioneer'];
-            } else {
-              userinfo[i]['auctioneer'] = '';
-            }
-            if (reson[i]['price'] != null) {
-              userinfo[i]['price'] = "${reson[i]['price']}";
-            } else {
-              userinfo[i]['price'] = '';
-            }
-            userinfo.add({});
-          });
-        }
-      }
-      print(userinfo);
-    } on TimeoutException catch (e) {
-      print('Timeout: $e');
-    } catch (e) {
-      print('Error: $e');
-    }
+    setState(() {
+      data = fruitid.getString('id');
+      // print(data);
+    });
+    _getalldata();
   }
 
   _getalldata() async {
-    SharedPreferences fruitid = await SharedPreferences.getInstance();
-    data = fruitid.getString('id');
-
     try {
       http.Response responses = await http.post(_url + 'allfarminfoauc',
           body: {"id": data}).timeout(Duration(seconds: 5));
       var respon = responses.body;
+      
       if (responses.statusCode == 200) {
         var reson = jsonDecode(respon);
         var date = reson[0]['Date_end'];
@@ -180,7 +170,7 @@ class _NewAuctionState extends State<NewAuction> {
           fruit[0]['left'] = '00:$hourfi:$minutefi';
           fruit[0]['time'] = total;
         });
-        _reduce();
+        // _reduce();
       }
     } on TimeoutException catch (e) {
       print('Timeout: $e');
@@ -190,22 +180,19 @@ class _NewAuctionState extends State<NewAuction> {
   }
 
   _auction() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int price = int.parse(userinfo[0]['price']);
-    int plus = int.parse(dropdownValue);
-    int sum = price + plus;
-    print(sum);
+    SharedPreferences iduser = await SharedPreferences.getInstance();
+
     try {
       http.Response responses = await http.post(_url + 'auctionsstart', body: {
-        "id_user": prefs.getString('name'),
-        "id_sell": "${fruit[0]['id']}",
-        "price": "$sum"
+        "id_user": iduser.getInt('id'),
+        "id_sell": fruit[0]['id'],
+        "price": '500'
       }).timeout(Duration(seconds: 5));
       var respon = responses.body;
       if (responses.statusCode == 200) {
-        Navigator.pop(context);
-        _getaucinfo();
+        var reson = jsonDecode(respon);
       }
+      _reduce();
     } on TimeoutException catch (e) {
       print('Timeout: $e');
     } catch (e) {
@@ -218,33 +205,9 @@ class _NewAuctionState extends State<NewAuction> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('กดเพิ่ม'),
-          content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-            return DropdownButton(
-              value: dropdownValue,
-              items: <String>['5', '10', '20', '30', '40', '50']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue = newValue;
-                });
-              },
-            );
-          }),
-          actions: [
-            RaisedButton(
-              onPressed: () {
-                _auction();
-              },
-              child: Text('ประมูล'),
-            )
-          ],
+          title: Text('Result'),
+          content: Text("gg"),
+          actions: [],
         );
       },
     );
@@ -254,9 +217,8 @@ class _NewAuctionState extends State<NewAuction> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getaucinfo();
-    _getalldata();
-    _getimage();
+    _getid();
+    // _getuserinfo();
   }
 
   @override
@@ -264,28 +226,17 @@ class _NewAuctionState extends State<NewAuction> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(0, 196, 154, 10),
-        title: Text('สวนองุ่นน้าแวว'),
+        title: Text(fruit[0]['name']),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              child: CarouselSlider(
-                autoPlay: true,
-                autoPlayAnimationDuration: Duration(milliseconds: 500),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                height: MediaQuery.of(context).size.height / 2.5,
-                items: _image.map((card) {
-                  return Builder(builder: (BuildContext context) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height / 2.5,
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        child: Image.network(card, fit: BoxFit.cover),
-                      ),
-                    );
-                  });
-                }).toList(),
+              child: Image.asset(
+                'assets/images/grape.jpg',
+                fit: BoxFit.cover,
+                width: 500,
+                height: 200,
               ),
             ),
             Padding(
@@ -368,41 +319,40 @@ class _NewAuctionState extends State<NewAuction> {
             Container(
               width: 400,
               height: 200,
-              child: ListView.builder(
-                itemCount: userinfo.length >= 5 ? 5 : userinfo.length - 1,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, right: 20),
-                        child: Row(children: [
-                          index < 1
-                              ? Icon(
-                                  Icons.stars,
-                                  color: Colors.yellow[700],
-                                )
-                              : Icon(
-                                  Icons.receipt,
-                                  color: Colors.yellow[700],
-                                ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('${index + 1}'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(userinfo[index]['auctioneer']),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("${userinfo[index]['price']}"),
-                          )
-                        ]),
-                      ),
-                    ],
-                  );
-                },
+              child: Expanded(
+                child: ListView.builder(
+                  itemCount: userinfo.length - 1,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, right: 20),
+                          child: Row(children: [
+                            index < 2
+                                ? Icon(
+                                    Icons.stars,
+                                    color: Colors.yellow[700],
+                                  )
+                                : null,
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('${index + 1}'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(userinfo[index]['auctioneer']),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(userinfo[index]['price']),
+                            )
+                          ]),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             Padding(
@@ -500,7 +450,7 @@ class _NewAuctionState extends State<NewAuction> {
                 'assets/images/auction.png',
                 width: 20,
               ),
-              onPressed: () => _showAlert(),
+              onPressed: () => _getuserinfo(),
               label: Text(
                 'ประมูล',
                 style: TextStyle(color: Colors.white),

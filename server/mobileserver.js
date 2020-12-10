@@ -162,14 +162,12 @@ app.post("/allfarminfoauc", function (req, res) {
         }
         else {
             res.json(result);
-            console.log(result);
         }
     })
 });
 
 app.post("/image", function (req, res) {
     const id = req.body.id;
-    console.log(id);
     let sql = "SELECT * FROM image WHERE Sell_id = ? ";
     con.query(sql, [id], function (err, result, fields) {
 
@@ -184,10 +182,55 @@ app.post("/image", function (req, res) {
         }
         else {
             res.json(result);
-            console.log(result[0].image);
         }
     })
 });
+
+app.post("/auctionsstart", function (req, res) {
+    const id_user = req.body.id_user;
+    const id_sell = req.body.id_sell;
+    const price = req.body.price;
+    const id = req.body.id;
+
+    let sql = "INSERT INTO auction(Auctioneer,Sell_id,price) VALUES (?,?,?)";
+    con.query(sql, [id_user,id_sell,price], function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(503).send("เซิร์ฟเวอร์ไม่ตอบสนอง");
+            return;
+        }
+        // get inserted rows
+        const numrows = result.affectedRows;
+        if (numrows != 1) {
+            console.error("Error");
+            res.status(500).send("ไม่สามารถเพิ่มข้อมูลได้");
+        }
+        else {
+            res.send("เพิ่มข้อมูลเรียบร้อย");
+        }
+    })
+});
+
+app.post("/checkmostp", function (req, res) {
+    const id = req.body.id;
+    let sql = "SELECT * FROM auction WHERE Sell_id = ? ORDER BY price DESC";
+    con.query(sql, [id], function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(503).send("เซิร์ฟเวอร์ไม่ตอบสนอง");
+            return;
+        }
+        const numrows = result.affectedRows;
+        if (numrows > 1) {
+            console.error("Error");
+            res.status(500).send("ไม่มีข้อมูล");
+        }
+        else {
+            res.json(result);
+        }
+    })
+});
+
 
 const port = process.env.PORT || 35000;
 app.listen(port, function () {
