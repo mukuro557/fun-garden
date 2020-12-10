@@ -65,6 +65,8 @@ app.post("/login", function (req, res) {
 app.post("/register", function (req, res) {
     const username = req.body.username;
     const password = req.body.password;
+    const role = req.body.role;
+    const tel =req.body;
 
     //checked existing username
     let sql = "SELECT User_id FROM user WHERE Username=?";
@@ -83,7 +85,7 @@ app.post("/register", function (req, res) {
         else {
             bcrypt.hash(password, 10, function (err, hash) {
                 //return hashed password, 60 characters
-                sql = "INSERT INTO user(Username, Password) VALUES (?,?)";
+                sql = "INSERT INTO user(Username, Password,Role) VALUES (?,?)";
                 con.query(sql, [username, hash], function (err, result, fields) {
                     if (err) {
                         console.error(err.message);

@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Regis extends StatefulWidget {
   @override
@@ -7,12 +9,57 @@ class Regis extends StatefulWidget {
 
 class _RegisState extends State<Regis> {
   TextEditingController _username = TextEditingController();
-
   TextEditingController _password = TextEditingController();
-
+  TextEditingController _conpassword = TextEditingController();
   TextEditingController _phone = TextEditingController();
+  String _url = 'http://10.0.2.2:35000/';
 
-  _register() {}
+  _register() async {
+    if (_password.text == _conpassword.text) {
+      if (_password.text != '' && _username.text != '' && _phone.text != '') {
+        try {
+          http.Response responses = await http.post(_url + 'register', body: {
+            "username": _username.text,
+            "password": _username.text,
+            "role": _username.text,
+          }).timeout(Duration(seconds: 5));
+          var respon = responses.body;
+          showAlert();
+        } on TimeoutException catch (e) {
+          print('Timeout: $e');
+        } catch (e) {
+          print('Error: $e');
+        }
+      } else {
+        showAlertloinfail('กรุณากรอข้อความให้ครบถ้วน');
+      }
+    } else {
+      showAlertloinfail('รหัสผ่านไม่ตรงกัน');
+    }
+  }
+
+  Future showAlertloinfail(String word) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(word),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                _username.text = '';
+                _password.text = '';
+                _conpassword.text = '';
+                _phone.text = '';
+                Navigator.pop(context);
+              },
+              child: Text('ตกลง'),
+            )
+          ],
+        );
+      },
+    );
+  }
 
   Future showAlert() async {
     await showDialog(
@@ -129,6 +176,8 @@ class _RegisState extends State<Regis> {
                                           borderSide:
                                               BorderSide(color: Colors.grey)),
                                     ),
+                                    autofocus: false,
+                                    obscureText: true,
                                   )),
                             ],
                           ),
@@ -147,7 +196,7 @@ class _RegisState extends State<Regis> {
                               Expanded(
                                   flex: 9,
                                   child: TextField(
-                                    controller: _password,
+                                    controller: _conpassword,
                                     decoration: InputDecoration(
                                       hintText: 'ยืนยันรหัสผ่าน',
                                       hintStyle: TextStyle(color: Colors.black),
@@ -155,6 +204,8 @@ class _RegisState extends State<Regis> {
                                           borderSide:
                                               BorderSide(color: Colors.grey)),
                                     ),
+                                    autofocus: false,
+                                    obscureText: true,
                                   )),
                             ],
                           ),
@@ -207,7 +258,7 @@ class _RegisState extends State<Regis> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   onPressed: () {
-                                    showAlert();
+                                    _register();
                                   },
                                 ),
                               ),
